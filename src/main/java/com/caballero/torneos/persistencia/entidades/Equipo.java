@@ -1,47 +1,20 @@
 package com.caballero.torneos.persistencia.entidades;
 
 public class Equipo {
-	private Integer equipoID;
+	private Integer ID;
 	private String nombre;
 	
-	public Equipo(Integer equipoID, String nombre) {
-		this.equipoID = equipoID;
+	public Equipo(Integer ID, String nombre) {
+		this.ID = ID;
 		this.nombre = nombre;
 	}
 
-	@Override
-	public String toString() {
-		return nombre;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Equipo other = (Equipo) obj;
-		if (equipoID == null) {
-			if (other.equipoID != null)
-				return false;
-		} else if (!equipoID.equals(other.equipoID))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		return true;
-	}
-
-	public Integer getEquipoID() {
-		return equipoID;
+	public Integer getID() {
+		return ID;
 	}
 	
-	public void setEquipoID(Integer equipoID) {
-		this.equipoID = equipoID;
+	public void setID(Integer ID) {
+		this.ID = ID;
 	}
 	
 	public String getNombre() {

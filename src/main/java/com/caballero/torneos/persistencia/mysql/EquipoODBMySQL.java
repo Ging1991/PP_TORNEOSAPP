@@ -24,14 +24,14 @@ public class EquipoODBMySQL extends OBDMySQL implements EquipoOBD{
 	}
 
 	public void update(Equipo equipo) {
-		String condicion = ID +"="+equipo.getEquipoID();
+		String condicion = ID +"="+equipo.getID();
 		String valores = " nombre = '"+equipo.getNombre()+"'";
 		String consulta = "update "+tabla+" set "+valores+" where ("+condicion+");";
 		ejecutarSQL(consulta);
 	}
 
 	public void delete(Equipo equipo) {
-		String condicion = ID +"="+equipo.getEquipoID();
+		String condicion = ID +"="+equipo.getID();
 		String consulta = "delete from "+tabla+" where("+condicion+");";
 		ejecutarSQL(consulta);
 	}

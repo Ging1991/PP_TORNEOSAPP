@@ -12,7 +12,7 @@ public class JugadorOBDTest {
 	public static void insertTest(String nombre, Equipo equipo) {
 		System.out.println("___ Insert Test: "+nombre);
 		JugadorOBD obd = Factory.crearJugadorOBD();
-		obd.insert(new Jugador(-1, equipo.getEquipoID(), nombre));
+		obd.insert(new Jugador(-1, equipo.getID(), nombre));
 	}
 	
 	public static void selectTest() {

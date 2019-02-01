@@ -17,7 +17,7 @@ public class Fichador {
 	}
 	
 	public static void crearJugador(String nombre, Equipo equipo) {
-		Jugador jugador = new Jugador(-1, equipo.getEquipoID(), nombre);
+		Jugador jugador = new Jugador(-1, equipo.getID(), nombre);
 		JugadorOBD obd = Factory.crearJugadorOBD();
 		obd.insert(jugador);
 	}

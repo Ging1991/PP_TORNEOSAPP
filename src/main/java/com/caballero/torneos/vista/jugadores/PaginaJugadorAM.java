@@ -54,7 +54,7 @@ public class PaginaJugadorAM extends VerticalLayout implements View {
 			Fichador.crearJugador(nombre, equipo);
 		else {
 			jugador.setNombre(nombre);
-			jugador.setEquipo(equipo.getEquipoID());
+			jugador.setEquipo(equipo.getID());
 			Fichador.actualizarJugador(jugador);
 		}
 		jugador = null;
