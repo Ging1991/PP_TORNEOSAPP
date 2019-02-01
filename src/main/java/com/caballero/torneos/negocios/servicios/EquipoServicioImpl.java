@@ -1,6 +1,7 @@
 package com.caballero.torneos.negocios.servicios;
 
 import com.caballero.torneos.negocios.EquipoServicio;
+import com.caballero.torneos.negocios.NombreEquipoInvalidoExcepcion;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.caballero.torneos.persistencia.interfaces.EquipoOBD;
 
@@ -12,7 +13,13 @@ public class EquipoServicioImpl implements EquipoServicio {
 	}
 
 	@Override
-	public boolean agregarEquipo(Equipo equipo) {
+	public boolean agregarEquipo(Equipo equipo) throws NombreEquipoInvalidoExcepcion {
+		if (equipo.getNombre() == null)
+			throw new NombreEquipoInvalidoExcepcion("El nombre del equipo no puede estar vacio.");
+		
+		if (equipo.getNombre().length() < 3)
+			throw new NombreEquipoInvalidoExcepcion("El nombre del equipo no puede tener menos de  caracteres.");
+		
 		obd.insert(equipo);
 		return true;
 	}

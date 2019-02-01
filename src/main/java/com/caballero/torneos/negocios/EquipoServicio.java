@@ -4,6 +4,6 @@ import com.caballero.torneos.persistencia.entidades.Equipo;
 
 public interface EquipoServicio {
 	
-	public boolean agregarEquipo(Equipo equipo);
+	public boolean agregarEquipo(Equipo equipo) throws NombreEquipoInvalidoExcepcion;
 
 }
