@@ -1,5 +1,6 @@
 package com.caballero.torneos.negocios;
 
+import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.negocios.servicios.EquipoServicioImpl;
 import com.caballero.torneos.persistencia.Factory;
 import com.caballero.torneos.persistencia.interfaces.EquipoOBD;

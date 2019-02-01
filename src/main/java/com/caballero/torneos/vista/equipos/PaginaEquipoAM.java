@@ -1,7 +1,10 @@
 package com.caballero.torneos.vista.equipos;
 
 import com.caballero.torneos.AplicacionUI;
+import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.Fichador;
+import com.caballero.torneos.negocios.excepciones.NombreEquipoInvalidoExcepcion;
+import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -14,8 +17,11 @@ public class PaginaEquipoAM extends VerticalLayout implements View {
 	public static String NOMBRE = "PaginaEquipoAM";
 	private TextField inNombre;
 	private Equipo equipo;
+	private EquipoServicio servicio;
 	
 	public PaginaEquipoAM() {
+		servicio = FabricaServicios.crearEquipoServicio();
+		
 		// ENTRADAS DE TEXTO
 		inNombre = new TextField("Nombre");
 		
@@ -36,15 +42,23 @@ public class PaginaEquipoAM extends VerticalLayout implements View {
 	}
 	
 	private void aceptar() {
-		String nombre = inNombre.getValue();
-		if (equipo == null)
-			Fichador.crearEquipo(nombre);
-		else {
-			equipo.setNombre(nombre);
-			Fichador.actualizarEquipo(equipo);
-		}
-		equipo = null;
-		volver();	
+		try {
+			String nombre = inNombre.getValue();
+			Equipo nuevo = new Equipo(-1, nombre);
+			
+			
+			if (equipo == null)
+				servicio.agregarEquipo(nuevo);
+			else {
+				equipo.setNombre(nombre);
+				servicio.modificarEquipo(equipo);
+			}
+			equipo = null;
+			volver();
+		} catch (NombreEquipoInvalidoExcepcion e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 	private void volver() {

@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.caballero.torneos.negocios.EquipoServicio;
 import com.caballero.torneos.negocios.FabricaServicios;
-import com.caballero.torneos.negocios.NombreEquipoInvalidoExcepcion;
+import com.caballero.torneos.negocios.excepciones.NombreEquipoInvalidoExcepcion;
+import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 
 class EquipoServicioTest {
@@ -62,5 +62,5 @@ class EquipoServicioTest {
 			servicio.modificarEquipo(equipo);	
 		});
 	}
-	
+
 }

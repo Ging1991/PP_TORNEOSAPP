@@ -1,7 +1,7 @@
 package com.caballero.torneos.negocios.servicios;
 
-import com.caballero.torneos.negocios.EquipoServicio;
-import com.caballero.torneos.negocios.NombreEquipoInvalidoExcepcion;
+import com.caballero.torneos.negocios.excepciones.NombreEquipoInvalidoExcepcion;
+import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.caballero.torneos.persistencia.interfaces.EquipoOBD;
 

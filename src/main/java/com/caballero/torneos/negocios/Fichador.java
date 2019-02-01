@@ -10,12 +10,6 @@ import com.caballero.torneos.persistencia.interfaces.JugadorOBD;
 
 public class Fichador {
 
-	public static void crearEquipo(String nombre) {
-		Equipo equipo = new Equipo(-1, nombre);
-		EquipoOBD obd = Factory.crearEquipoOBD();
-		obd.insert(equipo);
-	}
-	
 	public static void crearJugador(String nombre, Equipo equipo) {
 		Jugador jugador = new Jugador(-1, equipo.getID(), nombre);
 		JugadorOBD obd = Factory.crearJugadorOBD();
@@ -25,11 +19,6 @@ public class Fichador {
 	public static List<Equipo> traerEquipos() {
 		EquipoOBD obd = Factory.crearEquipoOBD();
 		return obd.select();
-	}
-
-	public static void actualizarEquipo(Equipo equipo) {
-		EquipoOBD obd = Factory.crearEquipoOBD();
-		obd.update(equipo);
 	}
 
 	public static void borrarEquipo(Equipo equipo) {
