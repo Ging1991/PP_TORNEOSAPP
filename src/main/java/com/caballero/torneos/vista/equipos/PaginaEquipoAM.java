@@ -3,7 +3,7 @@ package com.caballero.torneos.vista.equipos;
 import com.caballero.torneos.AplicacionUI;
 import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.Fichador;
-import com.caballero.torneos.negocios.excepciones.NombreEquipoInvalidoExcepcion;
+import com.caballero.torneos.negocios.excepciones.EquipoInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.vaadin.navigator.View;
@@ -55,7 +55,7 @@ public class PaginaEquipoAM extends VerticalLayout implements View {
 			}
 			equipo = null;
 			volver();
-		} catch (NombreEquipoInvalidoExcepcion e) {
+		} catch (EquipoInvalidoExcepcion e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	

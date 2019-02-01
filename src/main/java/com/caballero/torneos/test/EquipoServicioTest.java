@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.caballero.torneos.negocios.FabricaServicios;
-import com.caballero.torneos.negocios.excepciones.NombreEquipoInvalidoExcepcion;
+import com.caballero.torneos.negocios.excepciones.EquipoInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 
@@ -20,7 +20,7 @@ class EquipoServicioTest {
 	}
 	
 	@Test
-	void agregarEquipo_NombreMasDe3Caracteres_retornaTrue() throws NombreEquipoInvalidoExcepcion {
+	void agregarEquipo_NombreMasDe3Caracteres_retornaTrue() throws EquipoInvalidoExcepcion {
 		Equipo equipo = new Equipo(-1, "equipo");
 		assertTrue(servicio.agregarEquipo(equipo));
 	}
@@ -28,7 +28,7 @@ class EquipoServicioTest {
 	@Test()
 	void agregarEquipo_NombreMenosDe3Caracteres_retornaExcepcion() {
 		Equipo equipo = new Equipo(-1, "eq");
-		assertThrows(NombreEquipoInvalidoExcepcion.class, () -> {
+		assertThrows(EquipoInvalidoExcepcion.class, () -> {
 			servicio.agregarEquipo(equipo);	
 		});
 	}
@@ -36,13 +36,13 @@ class EquipoServicioTest {
 	@Test()
 	void agregarEquipo_NombreNull_retornaExcepcion() {
 		Equipo equipo = new Equipo(-1, null);
-		assertThrows(NombreEquipoInvalidoExcepcion.class, () -> {
+		assertThrows(EquipoInvalidoExcepcion.class, () -> {
 			servicio.agregarEquipo(equipo);	
 		});
 	}
 
 	@Test
-	void modificarEquipo_NombreMasDe3Caracteres_retornaTrue() throws NombreEquipoInvalidoExcepcion {
+	void modificarEquipo_NombreMasDe3Caracteres_retornaTrue() throws EquipoInvalidoExcepcion {
 		Equipo equipo = new Equipo(1, "equipo");
 		assertTrue(servicio.modificarEquipo(equipo));
 	}
@@ -50,7 +50,7 @@ class EquipoServicioTest {
 	@Test()
 	void modificarEquipo_NombreMenosDe3Caracteres_retornaExcepcion() {
 		Equipo equipo = new Equipo(1, "eq");
-		assertThrows(NombreEquipoInvalidoExcepcion.class, () -> {
+		assertThrows(EquipoInvalidoExcepcion.class, () -> {
 			servicio.modificarEquipo(equipo);	
 		});
 	}
@@ -58,7 +58,7 @@ class EquipoServicioTest {
 	@Test()
 	void modificarEquipo_NombreNull_retornaExcepcion() {
 		Equipo equipo = new Equipo(-1, null);
-		assertThrows(NombreEquipoInvalidoExcepcion.class, () -> {
+		assertThrows(EquipoInvalidoExcepcion.class, () -> {
 			servicio.modificarEquipo(equipo);	
 		});
 	}
