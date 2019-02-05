@@ -9,4 +9,6 @@ public interface JugadorServicio {
 	
 	public boolean modificarJugador(Jugador jugador) throws JugadorInvalidoExcepcion;
 
+	public Jugador traerPorNombre(String nombre);
+	
 }

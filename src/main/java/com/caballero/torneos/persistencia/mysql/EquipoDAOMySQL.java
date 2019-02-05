@@ -56,7 +56,6 @@ public class EquipoDAOMySQL extends DAOMySQL implements EquipoDAO{
 		return selectByID(id);
 	}
 	
-
 	@Override
 	public Equipo selectByNombre(String nombre) {
 		return selectUnicoByCondicion("nombre = "+nombre);

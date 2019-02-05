@@ -4,7 +4,6 @@ import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.negocios.interfaces.JugadorServicio;
 import com.caballero.torneos.negocios.servicios.EquipoServicioImpl;
 import com.caballero.torneos.negocios.servicios.JugadorServicioImpl;
-import com.caballero.torneos.persistencia.FabricaDAO;
 import com.caballero.torneos.persistencia.interfaces.EquipoDAO;
 import com.caballero.torneos.persistencia.interfaces.JugadorDAO;
 
@@ -16,8 +15,9 @@ public class FabricaServiciosTest {
 	}
 	
 	public static JugadorServicio crearJugadorServicio() {
-		JugadorDAO obd = FabricaDAO.crearJugadorOBD();
-		return new JugadorServicioImpl(obd);
+		JugadorDAO obd = new JugadorDAOTest();
+		EquipoDAO dao = new EquipoDAOTest();
+		return new JugadorServicioImpl(obd, dao);
 	}
 
 }

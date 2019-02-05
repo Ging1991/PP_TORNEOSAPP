@@ -17,7 +17,8 @@ public class FabricaServicios {
 	
 	public static JugadorServicio crearJugadorServicio() {
 		JugadorDAO obd = FabricaDAO.crearJugadorOBD();
-		return new JugadorServicioImpl(obd);
+		EquipoDAO dao = FabricaDAO.crearEquipoOBD();
+		return new JugadorServicioImpl(obd, dao);
 	}
 
 }

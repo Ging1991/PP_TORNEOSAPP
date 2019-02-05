@@ -57,6 +57,19 @@ public class JugadorDAOMySQL extends DAOMySQL implements JugadorDAO{
 		return selectByID(id);
 	}
 	
+	@Override
+	public Jugador selectByNombre(String nombre) {
+		return selectUnicoByCondicion("nombre = "+nombre);
+	}
+	
+	private Jugador selectUnicoByCondicion(String condicion) {
+		List<Jugador> equipos = selectByCondicion(condicion);
+		if (!equipos.isEmpty())
+			return equipos.get(0);
+		return null;
+	}
+	
+	
 	private List<Jugador> selectByCondicion(String condicion) {
 		List<Jugador> jugadores = new ArrayList<Jugador>();
 		String comandoSQL = "select ID, "+campos+" from "+tabla+" where ("+condicion+");";  
