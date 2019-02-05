@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.excepciones.EquipoInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
@@ -15,14 +14,22 @@ class EquipoServicioTest {
 	private static EquipoServicio servicio;
 	
 	@BeforeAll
-	static void setup() {
-		servicio = FabricaServicios.crearEquipoServicio();
+	static void iniciar() {
+		servicio = FabricaServiciosTest.crearEquipoServicio();
 	}
 	
 	@Test
-	void agregarEquipo_NombreMasDe3Caracteres_retornaTrue() throws EquipoInvalidoExcepcion {
-		Equipo equipo = new Equipo(-1, "equipo");
+	void agregarEquipo_NombreMasDe3CaracteresNoRepetido_retornaTrue() throws EquipoInvalidoExcepcion {
+		Equipo equipo = new Equipo(-1, "Racing");
 		assertTrue(servicio.agregarEquipo(equipo));
+	}
+	
+	@Test
+	void agregarEquipo_NombreMasDe3CaracteresRepetido_retornaTrue() throws EquipoInvalidoExcepcion {
+		Equipo equipo = new Equipo(-1, "Boca");
+		assertThrows(EquipoInvalidoExcepcion.class, () -> {
+			servicio.agregarEquipo(equipo);	
+		});
 	}
 
 	@Test()
@@ -58,6 +65,14 @@ class EquipoServicioTest {
 	@Test()
 	void modificarEquipo_NombreNull_retornaExcepcion() {
 		Equipo equipo = new Equipo(-1, null);
+		assertThrows(EquipoInvalidoExcepcion.class, () -> {
+			servicio.modificarEquipo(equipo);	
+		});
+	}
+	
+	@Test()
+	void traerUltimoAgregado_ExisteAlMenosUno_retornaUltimoEquipo() {
+		Equipo equipo = new Equipo(-1, "");
 		assertThrows(EquipoInvalidoExcepcion.class, () -> {
 			servicio.modificarEquipo(equipo);	
 		});

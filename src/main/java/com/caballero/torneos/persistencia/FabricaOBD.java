@@ -11,12 +11,12 @@ import com.caballero.torneos.persistencia.mysql.ParticipanteODBMySQL;
 import com.caballero.torneos.persistencia.mysql.PartidoODBMySQL;
 import com.caballero.torneos.persistencia.mysql.TorneoOBDMySQL;
 
-public class Factory {
-	
+public class FabricaOBD {
+
 	public static EquipoOBD	crearEquipoOBD() {
 		return new EquipoODBMySQL();
 	}
-	
+
 	public static TorneoOBD	crearTorneoOBD() {
 		return new TorneoOBDMySQL();
 	}

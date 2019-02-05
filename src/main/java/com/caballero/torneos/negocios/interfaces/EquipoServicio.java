@@ -9,4 +9,8 @@ public interface EquipoServicio {
 	
 	public boolean modificarEquipo(Equipo equipo) throws EquipoInvalidoExcepcion;
 
+	public Equipo traerUltimoAgregado();
+
+	public Equipo traerPorNombre(String nombre) throws EquipoInvalidoExcepcion;
+
 }

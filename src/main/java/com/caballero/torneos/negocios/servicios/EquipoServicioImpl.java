@@ -14,24 +14,38 @@ public class EquipoServicioImpl implements EquipoServicio {
 
 	@Override
 	public boolean agregarEquipo(Equipo equipo) throws EquipoInvalidoExcepcion {
-		verificarEquipo(equipo);
+		verificarNombre(equipo.getNombre());
+		if (traerPorNombre(equipo.getNombre()) != null)
+			throw new EquipoInvalidoExcepcion("Ya existe un equipo creado con el nombre: "+equipo.getNombre());
+		
 		obd.insert(equipo);
 		return true;
 	}
 
 	@Override
 	public boolean modificarEquipo(Equipo equipo) throws EquipoInvalidoExcepcion {
-		verificarEquipo(equipo);
+		verificarNombre(equipo.getNombre());
 		obd.update(equipo);
 		return true;
 	}
 
-	private void verificarEquipo(Equipo equipo) throws EquipoInvalidoExcepcion {
-		if (equipo.getNombre() == null)
+	@Override
+	public Equipo traerUltimoAgregado() {
+		return obd.selectUltimo();
+	}
+
+	@Override
+	public Equipo traerPorNombre(String nombre) throws EquipoInvalidoExcepcion {
+		verificarNombre(nombre);
+		return obd.selectByNombre(nombre);
+	}
+
+	private void verificarNombre(String nombre) throws EquipoInvalidoExcepcion {
+		if (nombre == null)
 			throw new EquipoInvalidoExcepcion("El nombre del equipo no puede estar vacio.");
 		
-		if (equipo.getNombre().length() < 3)
+		if (nombre.length() < 3)
 			throw new EquipoInvalidoExcepcion("El nombre del equipo no puede tener menos de  caracteres.");
 	}
-	
+
 }

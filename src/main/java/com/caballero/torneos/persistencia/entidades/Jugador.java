@@ -1,21 +1,21 @@
 package com.caballero.torneos.persistencia.entidades;
 
 public class Jugador {
-	private Integer jugadorID, equipo;
+	private Integer ID, equipo;
 	private String nombre;
 
-	public Jugador(Integer jugadorID, Integer equipo, String nombre) {
-		this.jugadorID = jugadorID;
+	public Jugador(Integer ID, Integer equipo, String nombre) {
+		this.ID = ID;
 		this.equipo = equipo;
 		this.nombre = nombre;
 	}
 	
-	public Integer getJugadorID() {
-		return jugadorID;
+	public Integer getID() {
+		return ID;
 	}
 	
-	public void setJugadorID(Integer jugadorID) {
-		this.jugadorID = jugadorID;
+	public void setID(Integer ID) {
+		this.ID = ID;
 	}
 	
 	public Integer getEquipo() {

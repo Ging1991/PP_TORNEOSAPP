@@ -3,12 +3,12 @@ package com.caballero.torneos.persistencia.entidades;
 import com.caballero.torneos.persistencia.definidos.EstadoPartido;
 
 public class Partido {
-	private Integer partidoID, torneo, local, visitante, marcadorLocal, marcadorVisitante;
+	private Integer ID, torneo, local, visitante, marcadorLocal, marcadorVisitante;
 	private EstadoPartido estado;
 	
-	public Partido(Integer partidoID, Integer torneo, Integer local, Integer visitante, Integer marcadorLocal,
+	public Partido(Integer ID, Integer torneo, Integer local, Integer visitante, Integer marcadorLocal,
 			Integer marcadorVisitante, EstadoPartido estado) {
-		this.partidoID = partidoID;
+		this.ID = ID;
 		this.torneo = torneo;
 		this.local = local;
 		this.visitante = visitante;
@@ -17,12 +17,12 @@ public class Partido {
 		this.estado = estado;
 	}
 
-	public Integer getPartidoID() {
-		return partidoID;
+	public Integer getID() {
+		return ID;
 	}
 
-	public void setPartidoID(Integer partidoID) {
-		this.partidoID = partidoID;
+	public void setID(Integer partidoID) {
+		this.ID = partidoID;
 	}
 
 	public Integer getTorneo() {

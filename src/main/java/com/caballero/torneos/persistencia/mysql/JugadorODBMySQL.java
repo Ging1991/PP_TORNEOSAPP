@@ -14,7 +14,6 @@ import com.caballero.torneos.persistencia.interfaces.JugadorOBD;
 public class JugadorODBMySQL extends OBDMySQL implements JugadorOBD{
 	private final String campos = "nombre, equipo";
 	private final String tabla = "tor_jugadores";
-	private final String ID = "jugador_ID";
 	
 	@Override
 	public void insert(Jugador jugador) {
@@ -24,7 +23,7 @@ public class JugadorODBMySQL extends OBDMySQL implements JugadorOBD{
 	}
 
 	public void update(Jugador jugador) {
-		String condicion = ID +"="+jugador.getJugadorID();
+		String condicion = "ID = "+jugador.getID();
 		String valores = " nombre = '"+jugador.getNombre()+"'"
 				+", equipo = "+jugador.getEquipo();
 		String consulta = "update "+tabla+" set "+valores+" where ("+condicion+");";
@@ -32,29 +31,35 @@ public class JugadorODBMySQL extends OBDMySQL implements JugadorOBD{
 	}
 
 	public void delete(Jugador jugador) {
-		String condicion = ID +"="+jugador.getJugadorID();
+		String condicion = "ID = "+jugador.getID();
 		String consulta = "delete from "+tabla+" where("+condicion+");";
 		ejecutarSQL(consulta);
 	}
 	
 	@Override
 	public List<Jugador> select() {
-		String condicion = "1=1";
+		String condicion = "true";
 		return selectByCondicion(condicion);
 	}
 	
 	@Override
-	public Jugador selectByID(Integer id) {
-		String condicion = ID+"="+id;
+	public Jugador selectByID(int id) {
+		String condicion = "ID = "+id;
 		List<Jugador> jugadores = selectByCondicion(condicion);
 		if ( jugadores.size()>0)
 			return jugadores.get(0);
 		return null;
 	}
 
+	@Override
+	public Jugador selectUltimo() {
+		int id = selectLastID("id", tabla);
+		return selectByID(id);
+	}
+	
 	private List<Jugador> selectByCondicion(String condicion) {
-		List<Jugador> equipos = new ArrayList<Jugador>();
-		String comandoSQL = "select "+ID+", "+campos+" from "+tabla+" where ("+condicion+");";  
+		List<Jugador> jugadores = new ArrayList<Jugador>();
+		String comandoSQL = "select ID, "+campos+" from "+tabla+" where ("+condicion+");";  
 		
 		try { 
 			Class.forName(driver); 
@@ -63,8 +68,8 @@ public class JugadorODBMySQL extends OBDMySQL implements JugadorOBD{
 			ResultSet resultados = sentencia.executeQuery(comandoSQL);			
 	
 			while (resultados.next()) {
-				equipos.add(new Jugador(
-						resultados.getInt(ID),
+				jugadores.add(new Jugador(
+						resultados.getInt("ID"),
 						resultados.getInt("equipo"),
 						resultados.getString("nombre")
 						));
@@ -79,7 +84,8 @@ public class JugadorODBMySQL extends OBDMySQL implements JugadorOBD{
 			e.printStackTrace();
 		}
 			
-		return equipos;
+		return jugadores;
 	}
+
 	
 }

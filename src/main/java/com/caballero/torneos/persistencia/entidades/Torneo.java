@@ -4,24 +4,24 @@ import java.sql.Date;
 import com.caballero.torneos.persistencia.definidos.EstadoTorneo;
 
 public class Torneo {
-	private Integer torneoID;
+	private Integer ID;
 	private String nombre;
 	private Date fecha;
 	private EstadoTorneo estado;
 	
-	public Torneo(Integer torneoID, String nombre, Date fecha, EstadoTorneo estado) {
-		this.torneoID = torneoID;
+	public Torneo(Integer ID, String nombre, Date fecha, EstadoTorneo estado) {
+		this.ID = ID;
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.estado = estado;
 	}
 
-	public Integer getTorneoID() {
-		return torneoID;
+	public Integer getID() {
+		return ID;
 	}
 
-	public void setTorneoID(Integer torneoID) {
-		this.torneoID = torneoID;
+	public void setID(Integer ID) {
+		this.ID = ID;
 	}
 
 	public String getNombre() {

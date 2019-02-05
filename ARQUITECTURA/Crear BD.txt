@@ -5,9 +5,9 @@ USE torneos;
 
 -- EQUIPOS  *******************************************************************
 CREATE TABLE tor_equipos (
-    equipo_id INT(4) AUTO_INCREMENT,
+    id INT(4) AUTO_INCREMENT,
     nombre text,
-    CONSTRAINT tor_equipos_pk PRIMARY KEY (equipo_id)
+    CONSTRAINT tor_equipos_pk PRIMARY KEY (id)
 );
 
 -- ESTADO DE TORNEO  *******************************************************************

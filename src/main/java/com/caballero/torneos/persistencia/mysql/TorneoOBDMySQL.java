@@ -27,7 +27,7 @@ public class TorneoOBDMySQL extends OBDMySQL implements TorneoOBD{
 	}
 	
 	public void update(Torneo torneo) {
-		String condicion = ID +"="+torneo.getTorneoID();
+		String condicion = ID +"="+torneo.getID();
 		String valores = " nombre = '"+torneo.getNombre()+"'"
 				+", estado = "+ Definido.estadoTorneo(torneo.getEstado())
 				+", fecha = '"+torneo.getFecha()+"'";
@@ -36,7 +36,7 @@ public class TorneoOBDMySQL extends OBDMySQL implements TorneoOBD{
 	}
 
 	public void delete(Torneo torneo) {
-		String condicion = ID +"="+torneo.getTorneoID();
+		String condicion = ID +"="+torneo.getID();
 		String consulta = "delete from "+tabla+" where("+condicion+");";
 		ejecutarSQL(consulta);
 	}

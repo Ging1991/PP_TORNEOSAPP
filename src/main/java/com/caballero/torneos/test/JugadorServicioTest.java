@@ -13,16 +13,19 @@ import com.caballero.torneos.negocios.interfaces.JugadorServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 
 class JugadorServicioTest {
-	private static JugadorServicio servicio;
+	private static JugadorServicio jugadorServicio;
+	private static EquipoServicio equipoServicio;
+	
 	
 	@BeforeAll
 	static void setup() {
-		servicio = FabricaServicios.crearJugadorServicio();
+		jugadorServicio = FabricaServicios.crearJugadorServicio();
+		equipoServicio = FabricaServicios.crearEquipoServicio();
 	}
 	
 	@Test
 	void agregarJugador_NombreMasDe3CaracteresEquipoExistente_retornaTrue() throws EquipoInvalidoExcepcion {
-		Equipo equipo = new Equipo(-1, "equipo");
+		//Equipo equipo = equipoServicio.
 		//assertTrue(servicio.agregarEquipo(equipo));
 	}
 

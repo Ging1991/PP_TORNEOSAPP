@@ -33,7 +33,7 @@ public class ParticipanteODBMySQL extends OBDMySQL implements ParticipanteOBD{
 
 	@Override
 	public List<Participante> selectByTorneo(Torneo torneo) {
-		String condicion = ID+"="+torneo.getTorneoID();
+		String condicion = ID+"="+torneo.getID();
 		return selectByCondicion(condicion);
 	}
 
