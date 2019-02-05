@@ -1,5 +1,7 @@
 package com.caballero.torneos.negocios.servicios;
 
+import java.util.List;
+
 import com.caballero.torneos.negocios.excepciones.JugadorInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.JugadorServicio;
 import com.caballero.torneos.persistencia.entidades.Jugador;
@@ -16,7 +18,7 @@ public class JugadorServicioImpl implements JugadorServicio {
 	}
 
 	@Override
-	public boolean agregarJugador(Jugador jugador) throws JugadorInvalidoExcepcion {
+	public boolean agregar(Jugador jugador) throws JugadorInvalidoExcepcion {
 		verificarNombre(jugador.getNombre());
 		
 		if (traerPorNombre(jugador.getNombre()) != null)
@@ -30,9 +32,15 @@ public class JugadorServicioImpl implements JugadorServicio {
 	}
 
 	@Override
-	public boolean modificarJugador(Jugador jugador) throws JugadorInvalidoExcepcion {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean modificar(Jugador jugador) throws JugadorInvalidoExcepcion {
+		verificarNombre(jugador.getNombre());
+		
+		Jugador jugadorBD = traerPorNombre(jugador.getNombre());
+		if (jugadorBD != null && jugadorBD.getID() != jugador.getID())
+			throw new JugadorInvalidoExcepcion("Ya existe un jugador con el nombre: "+jugador.getNombre());
+		
+		dao.update(jugador);
+		return true;
 	}
 
 	@Override
@@ -47,6 +55,11 @@ public class JugadorServicioImpl implements JugadorServicio {
 		if (nombre.length() < 3)
 			throw new JugadorInvalidoExcepcion("El nombre no puede tener menos de 3 caracterres.");
 		
+	}
+
+	@Override
+	public List<Jugador> traerTodo() {
+		return dao.select();
 	}	
 		
 }

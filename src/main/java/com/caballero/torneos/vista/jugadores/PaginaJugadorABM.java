@@ -3,7 +3,9 @@ package com.caballero.torneos.vista.jugadores;
 import java.util.List;
 
 import com.caballero.torneos.AplicacionUI;
+import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.Fichador;
+import com.caballero.torneos.negocios.interfaces.JugadorServicio;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.vista.PaginaPrincipal;
 import com.caballero.torneos.vista.tablas.TablaJugadores;
@@ -18,9 +20,11 @@ public class PaginaJugadorABM extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 	public static String NOMBRE = "PaginaJugadorABM";
 	private TablaJugadores tabla;
+	private JugadorServicio jugadorServicio;
 	
 	public PaginaJugadorABM() {
-		tabla = new TablaJugadores(Fichador.traerJugadores());
+		jugadorServicio = FabricaServicios.crearJugadorServicio();
+		tabla = new TablaJugadores(jugadorServicio.traerTodo());
 		addComponent(tabla);
 		addComponent(crearBotones());
 	}
@@ -66,7 +70,7 @@ public class PaginaJugadorABM extends VerticalLayout implements View {
 		else {
 			Jugador jugador = jugadores.get(0);
 			Fichador.borrarJugador(jugador);
-			tabla.recargar(Fichador.traerJugadores());
+			tabla.recargar(jugadorServicio.traerTodo());
 		}
 	}
 
@@ -97,7 +101,7 @@ public class PaginaJugadorABM extends VerticalLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		tabla.recargar(Fichador.traerJugadores());
+		tabla.recargar(jugadorServicio.traerTodo());
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.caballero.torneos.test;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,14 +23,14 @@ class EquipoServicioTest {
 	@Test
 	void agregarEquipo_NombreMasDe3CaracteresNoRepetido_retornaTrue() throws EquipoInvalidoExcepcion {
 		Equipo equipo = new Equipo(-1, "Racing");
-		assertTrue(servicio.agregarEquipo(equipo));
+		assertTrue(servicio.agregar(equipo));
 	}
 	
 	@Test
 	void agregarEquipo_NombreMasDe3CaracteresRepetido_retornaTrue() throws EquipoInvalidoExcepcion {
 		Equipo equipo = new Equipo(-1, "Boca");
 		assertThrows(EquipoInvalidoExcepcion.class, () -> {
-			servicio.agregarEquipo(equipo);	
+			servicio.agregar(equipo);	
 		});
 	}
 
@@ -37,7 +38,7 @@ class EquipoServicioTest {
 	void agregarEquipo_NombreMenosDe3Caracteres_retornaExcepcion() {
 		Equipo equipo = new Equipo(-1, "eq");
 		assertThrows(EquipoInvalidoExcepcion.class, () -> {
-			servicio.agregarEquipo(equipo);	
+			servicio.agregar(equipo);	
 		});
 	}
 
@@ -45,21 +46,29 @@ class EquipoServicioTest {
 	void agregarEquipo_NombreNull_retornaExcepcion() {
 		Equipo equipo = new Equipo(-1, null);
 		assertThrows(EquipoInvalidoExcepcion.class, () -> {
-			servicio.agregarEquipo(equipo);	
+			servicio.agregar(equipo);	
 		});
 	}
 
 	@Test
 	void modificarEquipo_NombreMasDe3Caracteres_retornaTrue() throws EquipoInvalidoExcepcion {
 		Equipo equipo = new Equipo(1, "equipo");
-		assertTrue(servicio.modificarEquipo(equipo));
+		assertTrue(servicio.modificar(equipo));
+	}
+
+	@Test
+	void modificarEquipo_NombreRepetido_lanzaExcepcion() throws EquipoInvalidoExcepcion {
+		Equipo equipo = new Equipo(1, "Boca");
+		assertThrows(EquipoInvalidoExcepcion.class, () -> {
+			servicio.modificar(equipo);	
+		});
 	}
 
 	@Test()
 	void modificarEquipo_NombreMenosDe3Caracteres_retornaExcepcion() {
 		Equipo equipo = new Equipo(1, "eq");
 		assertThrows(EquipoInvalidoExcepcion.class, () -> {
-			servicio.modificarEquipo(equipo);	
+			servicio.modificar(equipo);	
 		});
 	}
 
@@ -67,16 +76,14 @@ class EquipoServicioTest {
 	void modificarEquipo_NombreNull_retornaExcepcion() {
 		Equipo equipo = new Equipo(-1, null);
 		assertThrows(EquipoInvalidoExcepcion.class, () -> {
-			servicio.modificarEquipo(equipo);	
+			servicio.modificar(equipo);	
 		});
 	}
 	
 	@Test()
 	void traerUltimoAgregado_ExisteAlMenosUno_retornaUltimoEquipo() {
-		Equipo equipo = new Equipo(-1, "");
-		assertThrows(EquipoInvalidoExcepcion.class, () -> {
-			servicio.modificarEquipo(equipo);	
-		});
+		Equipo equipo = servicio.traerUltimoAgregado();
+		assertNotNull(equipo);
 	}
 
 }

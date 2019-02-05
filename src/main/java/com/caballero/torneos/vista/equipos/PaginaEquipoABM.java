@@ -3,9 +3,12 @@ package com.caballero.torneos.vista.equipos;
 import java.util.List;
 
 import com.caballero.torneos.AplicacionUI;
+import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.Fichador;
+import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.caballero.torneos.vista.PaginaPrincipal;
+import com.caballero.torneos.vista.tablas.TablaEquipos;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
@@ -17,8 +20,11 @@ public class PaginaEquipoABM extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 	public static String NOMBRE = "PaginaEquipoABM";
 	private TablaEquipos tabla;
+	private EquipoServicio equipoServicio;
 	
-	public PaginaEquipoABM() {}
+	public PaginaEquipoABM() {
+		equipoServicio = FabricaServicios.crearEquipoServicio();
+	}
 	
 	private HorizontalLayout crearBotones() {
 		Button btnAgregar = new Button("Agregar");
@@ -92,7 +98,7 @@ public class PaginaEquipoABM extends VerticalLayout implements View {
 	
 	private void recargar() {
 		removeAllComponents();
-		tabla = new TablaEquipos();
+		tabla = new TablaEquipos(equipoServicio.traerTodo());
 		addComponent(tabla);
 		addComponent(crearBotones());
 	}

@@ -1,7 +1,11 @@
 package com.caballero.torneos.vista.jugadores;
 
 import com.caballero.torneos.AplicacionUI;
+import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.Fichador;
+import com.caballero.torneos.negocios.excepciones.JugadorInvalidoExcepcion;
+import com.caballero.torneos.negocios.interfaces.EquipoServicio;
+import com.caballero.torneos.negocios.interfaces.JugadorServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.vaadin.data.provider.ListDataProvider;
@@ -10,6 +14,7 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -19,8 +24,13 @@ public class PaginaJugadorAM extends VerticalLayout implements View {
 	private TextField inNombre;
 	private ComboBox<Equipo> inEquipo;
 	private Jugador jugador;
+	private JugadorServicio jugadorServicio;
+	private EquipoServicio equipoServicio;
 	
-	public PaginaJugadorAM() {}
+	public PaginaJugadorAM() {
+		jugadorServicio  = FabricaServicios.crearJugadorServicio();
+		equipoServicio = FabricaServicios.crearEquipoServicio();
+	}
 	
 	private HorizontalLayout crearBotones() {
 		Button btnAceptar = new Button("Aceptar");
@@ -50,13 +60,19 @@ public class PaginaJugadorAM extends VerticalLayout implements View {
 		String nombre = inNombre.getValue();
 		Equipo equipo = inEquipo.getValue();
 		
-		if (jugador == null)
-			Fichador.crearJugador(nombre, equipo);
-		else {
-			jugador.setNombre(nombre);
-			jugador.setEquipo(equipo.getID());
-			Fichador.actualizarJugador(jugador);
+		try {
+			if (jugador == null)
+				jugadorServicio.agregar(new Jugador(-1, equipo.getID(), nombre));
+				
+			else {
+				jugador.setNombre(nombre);
+				jugador.setEquipo(equipo.getID());
+				jugadorServicio.modificar(jugador);
+			}
+		} catch (JugadorInvalidoExcepcion e) {
+			Notification.show(e.getMessage());
 		}
+		
 		jugador = null;
 		volver();	
 	}
@@ -69,7 +85,7 @@ public class PaginaJugadorAM extends VerticalLayout implements View {
 		inNombre.setValue("");
 		
 		inEquipo = new ComboBox<Equipo>("Equipo");
-		ListDataProvider<Equipo> data = new ListDataProvider<Equipo>(Fichador.traerEquipos());
+		ListDataProvider<Equipo> data = new ListDataProvider<Equipo>(equipoServicio.traerTodo());
 		inEquipo.setDataProvider(data);
 		
 		AplicacionUI ui = AplicacionUI.getInstancia();

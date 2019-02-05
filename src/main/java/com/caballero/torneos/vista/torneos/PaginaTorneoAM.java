@@ -3,8 +3,9 @@ package com.caballero.torneos.vista.torneos;
 import java.util.List;
 
 import com.caballero.torneos.AplicacionUI;
-import com.caballero.torneos.negocios.Fichador;
+import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.Organizador;
+import com.caballero.torneos.negocios.interfaces.JugadorServicio;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.persistencia.entidades.Torneo;
 import com.caballero.torneos.vista.tablas.TablaJugadores;
@@ -21,10 +22,12 @@ public class PaginaTorneoAM extends VerticalLayout implements View {
 	private TextField inNombre;
 	private Torneo torneo;
 	private TablaJugadores tabla;
+	private JugadorServicio jugadorServicio;
 	
 	public PaginaTorneoAM() {
+		jugadorServicio = FabricaServicios.crearJugadorServicio();
 		addComponent(inNombre = new TextField("Nombre"));
-		addComponent(tabla = new TablaJugadores(Fichador.traerJugadores()));
+		addComponent(tabla = new TablaJugadores(jugadorServicio.traerTodo()));
 		addComponent(crearBotones());
 	}
 	
@@ -72,7 +75,7 @@ public class PaginaTorneoAM extends VerticalLayout implements View {
 		torneo = (Torneo) ui.getSesion("torneo");
 		if (torneo != null) {
 			inNombre.setValue(torneo.getNombre());
-			tabla.recargar(Fichador.traerJugadores());
+			tabla.recargar(jugadorServicio.traerTodo());
 			tabla.setSeleccion(Organizador.traerJugadoresParticipantes(torneo));
 		}
 	}

@@ -1,8 +1,8 @@
-package com.caballero.torneos.vista.equipos;
+package com.caballero.torneos.vista.tablas;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.caballero.torneos.negocios.Fichador;
+
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Grid;
@@ -13,8 +13,7 @@ public class TablaEquipos extends VerticalLayout{
 	private static final long serialVersionUID = 1L;
 	Grid<Equipo> grilla;
 
-	public TablaEquipos() {
-		List<Equipo> equipos = Fichador.traerEquipos();
+	public TablaEquipos(List<Equipo> equipos) {
 		grilla = new Grid<Equipo>();
 		grilla.setSelectionMode(SelectionMode.SINGLE);
 		grilla.setItems(equipos);

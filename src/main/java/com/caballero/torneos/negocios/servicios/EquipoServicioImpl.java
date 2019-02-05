@@ -1,5 +1,7 @@
 package com.caballero.torneos.negocios.servicios;
 
+import java.util.List;
+
 import com.caballero.torneos.negocios.excepciones.EquipoInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
@@ -13,7 +15,7 @@ public class EquipoServicioImpl implements EquipoServicio {
 	}
 
 	@Override
-	public boolean agregarEquipo(Equipo equipo) throws EquipoInvalidoExcepcion {
+	public boolean agregar(Equipo equipo) throws EquipoInvalidoExcepcion {
 		verificarNombre(equipo.getNombre());
 		if (traerPorNombre(equipo.getNombre()) != null)
 			throw new EquipoInvalidoExcepcion("Ya existe un equipo creado con el nombre: "+equipo.getNombre());
@@ -23,8 +25,13 @@ public class EquipoServicioImpl implements EquipoServicio {
 	}
 
 	@Override
-	public boolean modificarEquipo(Equipo equipo) throws EquipoInvalidoExcepcion {
+	public boolean modificar(Equipo equipo) throws EquipoInvalidoExcepcion {
 		verificarNombre(equipo.getNombre());
+		Equipo equipoBD = traerPorNombre(equipo.getNombre()); 
+		
+		if (equipoBD != null && equipoBD.getID() != equipo.getID())
+			throw new EquipoInvalidoExcepcion("Ya existe otro equipo con el nombre: "+equipo.getNombre());
+		
 		obd.update(equipo);
 		return true;
 	}
@@ -46,6 +53,11 @@ public class EquipoServicioImpl implements EquipoServicio {
 		
 		if (nombre.length() < 3)
 			throw new EquipoInvalidoExcepcion("El nombre del equipo no puede tener menos de  caracteres.");
+	}
+
+	@Override
+	public List<Equipo> traerTodo() {
+		return obd.select();
 	}
 
 }
