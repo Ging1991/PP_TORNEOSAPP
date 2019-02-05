@@ -3,12 +3,12 @@ package com.caballero.torneos.negocios.servicios;
 import com.caballero.torneos.negocios.excepciones.EquipoInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.persistencia.entidades.Equipo;
-import com.caballero.torneos.persistencia.interfaces.EquipoOBD;
+import com.caballero.torneos.persistencia.interfaces.EquipoDAO;
 
 public class EquipoServicioImpl implements EquipoServicio {
-	private EquipoOBD obd;
+	private EquipoDAO obd;
 	
-	public EquipoServicioImpl(EquipoOBD obd) {
+	public EquipoServicioImpl(EquipoDAO obd) {
 		this.obd = obd;
 	}
 

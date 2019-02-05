@@ -2,21 +2,21 @@ package com.caballero.torneos.test;
 
 import java.util.List;
 
-import com.caballero.torneos.persistencia.FabricaOBD;
+import com.caballero.torneos.persistencia.FabricaDAO;
 import com.caballero.torneos.persistencia.entidades.Participante;
-import com.caballero.torneos.persistencia.interfaces.ParticipanteOBD;
+import com.caballero.torneos.persistencia.interfaces.ParticipanteDAO;
 
 public class ParticipanteOBDTest {
 	
 	public static void insertTest(Participante participante) {
 		System.out.println("___ Insert Test");
-		ParticipanteOBD obd = FabricaOBD.crearParticipanteOBD();
+		ParticipanteDAO obd = FabricaDAO.crearParticipanteOBD();
 		obd.insert(participante);
 	}
 	
 	public static void selectTest() {
 		System.out.println("___ Select test");
-		ParticipanteOBD obd = FabricaOBD.crearParticipanteOBD();
+		ParticipanteDAO obd = FabricaDAO.crearParticipanteOBD();
 		List<Participante> participantes = obd.select();
 		System.out.println("Cantidad: "+participantes.size());
 		for (Participante participante: participantes)

@@ -1,4 +1,4 @@
-package com.caballero.torneos.negocios;
+package com.caballero.torneos.test.repositorio;
 
 import com.caballero.torneos.negocios.interfaces.EquipoServicio;
 import com.caballero.torneos.negocios.interfaces.JugadorServicio;
@@ -8,10 +8,10 @@ import com.caballero.torneos.persistencia.FabricaDAO;
 import com.caballero.torneos.persistencia.interfaces.EquipoDAO;
 import com.caballero.torneos.persistencia.interfaces.JugadorDAO;
 
-public class FabricaServicios {
+public class FabricaServiciosTest {
 	
 	public static EquipoServicio crearEquipoServicio() {
-		EquipoDAO obd = FabricaDAO.crearEquipoOBD();
+		EquipoDAO obd = new EquipoDAOTest();
 		return new EquipoServicioImpl(obd);
 	}
 	

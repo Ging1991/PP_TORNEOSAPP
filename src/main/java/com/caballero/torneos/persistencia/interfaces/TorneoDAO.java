@@ -3,7 +3,7 @@ package com.caballero.torneos.persistencia.interfaces;
 import java.util.List;
 import com.caballero.torneos.persistencia.entidades.Torneo;
 
-public interface TorneoOBD {
+public interface TorneoDAO {
 
 	public void insert(Torneo torneo);
 	

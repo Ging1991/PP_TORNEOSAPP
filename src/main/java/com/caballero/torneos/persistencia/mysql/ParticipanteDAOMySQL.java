@@ -6,12 +6,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.caballero.torneos.persistencia.OBDMySQL;
+import com.caballero.torneos.persistencia.DAOMySQL;
 import com.caballero.torneos.persistencia.entidades.Participante;
 import com.caballero.torneos.persistencia.entidades.Torneo;
-import com.caballero.torneos.persistencia.interfaces.ParticipanteOBD;
+import com.caballero.torneos.persistencia.interfaces.ParticipanteDAO;
 
-public class ParticipanteODBMySQL extends OBDMySQL implements ParticipanteOBD{
+public class ParticipanteDAOMySQL extends DAOMySQL implements ParticipanteDAO{
 	private final String campos = "torneo, jugador, derrotas";
 	private final String tabla = "tor_participantes";
 	private final String ID = "participante_ID";

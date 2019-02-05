@@ -7,11 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.caballero.torneos.persistencia.OBDMySQL;
+import com.caballero.torneos.persistencia.DAOMySQL;
 import com.caballero.torneos.persistencia.entidades.Jugador;
-import com.caballero.torneos.persistencia.interfaces.JugadorOBD;
+import com.caballero.torneos.persistencia.interfaces.JugadorDAO;
 
-public class JugadorODBMySQL extends OBDMySQL implements JugadorOBD{
+public class JugadorDAOMySQL extends DAOMySQL implements JugadorDAO{
 	private final String campos = "nombre, equipo";
 	private final String tabla = "tor_jugadores";
 	

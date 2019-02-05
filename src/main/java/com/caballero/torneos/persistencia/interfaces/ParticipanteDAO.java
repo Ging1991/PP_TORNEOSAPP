@@ -4,7 +4,7 @@ import java.util.List;
 import com.caballero.torneos.persistencia.entidades.Participante;
 import com.caballero.torneos.persistencia.entidades.Torneo;
 
-public interface ParticipanteOBD {
+public interface ParticipanteDAO {
 	
 	public void insert(Participante participante);
 	

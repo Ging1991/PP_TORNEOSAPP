@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.caballero.torneos.persistencia.Definido;
-import com.caballero.torneos.persistencia.OBDMySQL;
+import com.caballero.torneos.persistencia.DAOMySQL;
 import com.caballero.torneos.persistencia.entidades.Torneo;
-import com.caballero.torneos.persistencia.interfaces.TorneoOBD;
+import com.caballero.torneos.persistencia.interfaces.TorneoDAO;
 
-public class TorneoOBDMySQL extends OBDMySQL implements TorneoOBD{
+public class TorneoDAOMySQL extends DAOMySQL implements TorneoDAO{
 	private final String campos = "nombre, estado, fecha";
 	private final String tabla = "tor_torneos";
 	private final String ID = "torneo_ID";

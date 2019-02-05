@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class OBDMySQL {
+public class DAOMySQL {
 	protected String driver = "com.mysql.jdbc.Driver";
 	protected String cadenaConexion = "jdbc:mysql://localhost:3306/torneos?autoReconnect=true&useSSL=false"; 
 	protected String usuarioBD = "root"; 
