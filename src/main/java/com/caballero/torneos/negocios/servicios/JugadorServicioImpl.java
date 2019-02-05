@@ -17,9 +17,11 @@ public class JugadorServicioImpl implements JugadorServicio {
 
 	@Override
 	public boolean agregarJugador(Jugador jugador) throws JugadorInvalidoExcepcion {
+		verificarNombre(jugador.getNombre());
+		
 		if (traerPorNombre(jugador.getNombre()) != null)
 			throw new JugadorInvalidoExcepcion("Ya existe un jugador registrado bajo el nombre: "+jugador.getNombre());
-		
+
 		if (equipoDAO.selectByID(jugador.getEquipo()) == null)
 			throw new JugadorInvalidoExcepcion("No existe un equipo con el ID: "+jugador.getEquipo());
 			
@@ -38,4 +40,13 @@ public class JugadorServicioImpl implements JugadorServicio {
 		return dao.selectByNombre(nombre);
 	}
 	
+	private void verificarNombre(String nombre) throws JugadorInvalidoExcepcion {
+		if (nombre == null)
+			throw new JugadorInvalidoExcepcion("El nombre no puede estar vacio.");
+	
+		if (nombre.length() < 3)
+			throw new JugadorInvalidoExcepcion("El nombre no puede tener menos de 3 caracterres.");
+		
+	}	
+		
 }

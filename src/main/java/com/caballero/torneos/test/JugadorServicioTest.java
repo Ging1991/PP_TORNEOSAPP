@@ -61,10 +61,18 @@ class JugadorServicioTest {
 			jugadorServicio.agregarJugador(jugador);
 		});
 	}
-	
+
 	@Test
 	void agregarJugador_NombreNoRepetidoMenosDe3CaracteresEquipoExistente_lanzaExcepcion() throws JugadorInvalidoExcepcion {
 		Jugador jugador = new Jugador(-1, 1, "Ca");
+		assertThrows(JugadorInvalidoExcepcion.class, () -> {
+			jugadorServicio.agregarJugador(jugador);
+		});
+	}
+
+	@Test
+	void agregarJugador_NombreNull_EquipoExistente_lanzaExcepcion() throws JugadorInvalidoExcepcion {
+		Jugador jugador = new Jugador(-1, 1, null);
 		assertThrows(JugadorInvalidoExcepcion.class, () -> {
 			jugadorServicio.agregarJugador(jugador);
 		});
