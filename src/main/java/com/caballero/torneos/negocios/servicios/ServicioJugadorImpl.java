@@ -65,6 +65,11 @@ public class ServicioJugadorImpl implements ServicioJugador {
 	@Override
 	public Jugador traerUltimo() {
 		return jugadorDAO.selectUltimo();
+	}
+
+	@Override
+	public Jugador traerPorID(Integer ID) {
+		return jugadorDAO.selectByID(ID);
 	}	
 		
 }

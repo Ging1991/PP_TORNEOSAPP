@@ -65,6 +65,12 @@ public class ParticipanteDAOMySQL extends DAOMySQL implements ParticipanteDAO{
 		String condicion = "torneo = " + torneo.getID();
 		return selectByCondicion(condicion);
 	}
+	
+	@Override
+	public List<Participante> selectByTorneoDerrotas(Torneo torneo, int derrotas) {
+		String condicion = "torneo = " + torneo.getID()+ " and derrotas = "+derrotas;
+		return selectByCondicion(condicion);
+	}
 
 	private Participante selectUnicoByCondicion(String condicion) {
 		List<Participante> seleccion = selectByCondicion(condicion);

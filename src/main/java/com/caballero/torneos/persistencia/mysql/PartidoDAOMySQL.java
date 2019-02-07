@@ -9,7 +9,9 @@ import java.util.List;
 
 import com.caballero.torneos.persistencia.DAOMySQL;
 import com.caballero.torneos.persistencia.Definido;
+import com.caballero.torneos.persistencia.definidos.EstadoPartido;
 import com.caballero.torneos.persistencia.entidades.Partido;
+import com.caballero.torneos.persistencia.entidades.Torneo;
 import com.caballero.torneos.persistencia.interfaces.PartidoDAO;
 
 public class PartidoDAOMySQL extends DAOMySQL implements PartidoDAO{
@@ -64,6 +66,18 @@ public class PartidoDAOMySQL extends DAOMySQL implements PartidoDAO{
 		return selectByID(id);
 	}
 
+	@Override
+	public List<Partido> selectByTorneoEstado(Torneo torneo, EstadoPartido estado) {
+		String condicion = "torneo = "+torneo.getID()+" and estado = "+ Definido.estadoPartido(estado);
+		return selectByCondicion(condicion);
+	}
+
+	@Override
+	public List<Partido> selectByTorneo(Torneo torneo) {
+		String condicion = "torneo = "+torneo.getID();
+		return selectByCondicion(condicion);
+	}
+	
 	private Partido selectUnicoByCondicion(String condicion) {
 		List<Partido> seleccion = selectByCondicion(condicion);
 		if (!seleccion.isEmpty())

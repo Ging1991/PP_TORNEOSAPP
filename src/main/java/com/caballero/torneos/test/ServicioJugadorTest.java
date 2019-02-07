@@ -19,7 +19,7 @@ import com.caballero.torneos.persistencia.entidades.Jugador;
  * Nombre valido: El nombre del jugador es valido cuando no es NULL y tiene 3 o mas caracteres.
  * Equipo valido: El equipo es valido cuando existe.
  */
-class JugadorServicioTest {
+class ServicioJugadorTest {
 	private static ServicioJugador servicioJugador;
 	private static ServicioEquipo servicioEquipo;
 	
@@ -118,5 +118,19 @@ class JugadorServicioTest {
 		Jugador jugador = servicioJugador.traerUltimo();
 		assertNotNull(jugador);
 	}
-		
+
+	@Test
+	void traerPorID_JugadorExistente_retornaJugadorConEseID() {
+		Integer ID = 1;
+		Jugador jugador = servicioJugador.traerPorID(ID);
+		assertTrue(jugador.getID() == ID);
+	}
+
+	@Test
+	void traerPorID_JugadorInexistente_retornaJugadorConEseID() {
+		Integer ID = -1;
+		Jugador jugador = servicioJugador.traerPorID(ID);
+		assertNull(jugador);
+	}
+	
 }

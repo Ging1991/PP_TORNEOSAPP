@@ -1,5 +1,7 @@
 package com.caballero.torneos.negocios.servicios;
 
+import java.util.List;
+
 import com.caballero.torneos.negocios.interfaces.ServicioParticipante;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.persistencia.entidades.Participante;
@@ -18,6 +20,25 @@ public class ServicioParticipanteImpl implements ServicioParticipante {
 		Participante participante = new Participante(-1, torneo.getID(), jugador.getID(), 0);
 		participanteDAO.insert(participante);
 		return true;
+	}
+
+	@Override
+	public boolean eliminarParticipantes(Torneo torneo) {
+		List<Participante> participantes = traer(torneo);
+		for (Participante participante : participantes)
+			participanteDAO.delete(participante);
+		
+		return true;
+	}
+
+	@Override
+	public List<Participante> traer(Torneo torneo) {
+		return participanteDAO.selectByTorneo(torneo);
+	}
+
+	@Override
+	public List<Participante> traerPorDerrotas(Torneo torneo, int derrotas) {
+		return participanteDAO.selectByTorneoDerrotas(torneo, derrotas);
 	}
 
 }
