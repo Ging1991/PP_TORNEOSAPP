@@ -8,8 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.caballero.torneos.negocios.excepciones.JugadorInvalidoExcepcion;
-import com.caballero.torneos.negocios.interfaces.EquipoServicio;
-import com.caballero.torneos.negocios.interfaces.JugadorServicio;
+import com.caballero.torneos.negocios.interfaces.ServicioEquipo;
+import com.caballero.torneos.negocios.interfaces.ServicioJugador;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.test.repositorio.FabricaServiciosTest;
@@ -20,8 +20,8 @@ import com.caballero.torneos.test.repositorio.FabricaServiciosTest;
  * Equipo valido: El equipo es valido cuando existe.
  */
 class JugadorServicioTest {
-	private static JugadorServicio jugadorServicio;
-	private static EquipoServicio equipoServicio;
+	private static ServicioJugador jugadorServicio;
+	private static ServicioEquipo equipoServicio;
 	
 	@BeforeAll
 	static void setup() {

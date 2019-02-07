@@ -53,7 +53,7 @@ public class JugadorDAOMySQL extends DAOMySQL implements JugadorDAO{
 
 	@Override
 	public Jugador selectUltimo() {
-		int id = selectLastID("id", tabla);
+		int id = selectLastID(tabla);
 		return selectByID(id);
 	}
 	

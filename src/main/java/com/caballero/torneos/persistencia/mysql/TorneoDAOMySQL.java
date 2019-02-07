@@ -7,8 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.caballero.torneos.persistencia.Definido;
 import com.caballero.torneos.persistencia.DAOMySQL;
+import com.caballero.torneos.persistencia.Definido;
 import com.caballero.torneos.persistencia.entidades.Torneo;
 import com.caballero.torneos.persistencia.interfaces.TorneoDAO;
 
@@ -43,22 +43,26 @@ public class TorneoDAOMySQL extends DAOMySQL implements TorneoDAO{
 
 	@Override
 	public List<Torneo> select() {
-		String condicion = "1=1";
+		String condicion = "true";
 		return selectByCondicion(condicion);
 	}
 
 	@Override
-	public Torneo selectByID(Integer id) {
-		String condicion = ID+"="+id;
-		List<Torneo> torneos = selectByCondicion(condicion);
-		if (torneos.size()>0)
-			return torneos.get(0);
-		return null;
+	public Torneo selectByID(int id) {
+		return selectUnicoByCondicion("ID = "+id);
 	}
-	
+
 	@Override
-	public Integer selectUltimoID() {
-		return selectLastID(ID, tabla);
+	public Torneo selectUltimo() {
+		int id = selectLastID(tabla);
+		return selectByID(id);
+	}
+
+	private Torneo selectUnicoByCondicion(String condicion) {
+		List<Torneo> seleccion = selectByCondicion(condicion);
+		if (!seleccion.isEmpty())
+			return seleccion.get(0);
+		return null;
 	}
 	
 	private List<Torneo> selectByCondicion(String condicion) {
@@ -91,6 +95,5 @@ public class TorneoDAOMySQL extends DAOMySQL implements TorneoDAO{
 			
 		return torneos;
 	}
-
 	
 }

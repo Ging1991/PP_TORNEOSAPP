@@ -8,22 +8,18 @@ public class Definido {
 	public static EstadoTorneo estadoTorneo(Integer estado) {
 		EstadoTorneo ret = null;
 		if (estado == 1)
-			ret = EstadoTorneo.JUGANDO;
+			ret = EstadoTorneo.CURSO;
 		else if (estado == 2)
 			ret = EstadoTorneo.TERMINADO;
-		if (estado == 3)
-			ret = EstadoTorneo.CANCELADO;
 		return ret;
 	}
 
 	public static Integer estadoTorneo(EstadoTorneo estado) {
 		Integer ret = null;
-		if (estado == EstadoTorneo.JUGANDO)
+		if (estado == EstadoTorneo.CURSO)
 			ret = 1;
 		else if (estado == EstadoTorneo.TERMINADO)
 			ret = 2;
-		if (estado == EstadoTorneo.CANCELADO)
-			ret = 3;
 		return ret;
 	}
 
@@ -33,8 +29,6 @@ public class Definido {
 			ret = EstadoPartido.PENDIENTE;
 		else if (estado == 2)
 			ret = EstadoPartido.JUGADO;
-		else if (estado == 3)
-			ret = EstadoPartido.CANCELADO;
 		return ret;
 	}
 
@@ -44,8 +38,6 @@ public class Definido {
 			ret = 1;
 		else if (estado == EstadoPartido.JUGADO)
 			ret = 2;
-		else if (estado == EstadoPartido.CANCELADO)
-			ret = 3;
 		return ret;
 	}
 	

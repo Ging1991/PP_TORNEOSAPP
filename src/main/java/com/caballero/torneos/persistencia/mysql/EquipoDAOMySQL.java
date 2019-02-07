@@ -52,7 +52,7 @@ public class EquipoDAOMySQL extends DAOMySQL implements EquipoDAO{
 
 	@Override
 	public Equipo selectUltimo() {
-		Integer id = selectLastID("ID", tabla);
+		Integer id = selectLastID(tabla);
 		return selectByID(id);
 	}
 	

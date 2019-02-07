@@ -5,7 +5,7 @@ import java.util.List;
 import com.caballero.torneos.AplicacionUI;
 import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.Organizador;
-import com.caballero.torneos.negocios.interfaces.JugadorServicio;
+import com.caballero.torneos.negocios.interfaces.ServicioJugador;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.persistencia.entidades.Torneo;
 import com.caballero.torneos.vista.tablas.TablaJugadores;
@@ -22,7 +22,7 @@ public class PaginaTorneoAM extends VerticalLayout implements View {
 	private TextField inNombre;
 	private Torneo torneo;
 	private TablaJugadores tabla;
-	private JugadorServicio jugadorServicio;
+	private ServicioJugador jugadorServicio;
 	
 	public PaginaTorneoAM() {
 		jugadorServicio = FabricaServicios.crearJugadorServicio();

@@ -15,11 +15,11 @@ public class Organizador {
 	
 	public static void crearTorneo(String nombre, List<Jugador> jugadores) {
 		TorneoDAO obd = FabricaDAO.crearTorneoOBD();
-		Torneo torneo = new Torneo(-1, nombre, Almanaque.hoy(), EstadoTorneo.CREADO);
+		Torneo torneo = new Torneo(-1, nombre, Almanaque.hoy(), EstadoTorneo.CURSO);
 		obd.insert(torneo);
-		Integer torneoBDID = obd.selectUltimoID();
-		Torneo torneoDB = obd.selectByID(torneoBDID);
-		guardarParticipantes(torneoDB, jugadores);
+		//Integer torneoBDID = obd.selectUltimoID();
+		//Torneo torneoDB = obd.selectByID(torneoBDID);
+		//guardarParticipantes(torneoDB, jugadores);
 	}
 	
 	public static void guardarParticipantes(Torneo torneo, List<Jugador> jugadores) {

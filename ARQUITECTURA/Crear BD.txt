@@ -12,52 +12,68 @@ CREATE TABLE tor_equipos (
 
 -- ESTADO DE TORNEO  *******************************************************************
 CREATE TABLE tor_estados_torneo (
-    estado_id INT(4) AUTO_INCREMENT,
+    id INT(4) AUTO_INCREMENT,
     descripcion text,
-    CONSTRAINT tor_estados_torneo_pk PRIMARY KEY (estado_id)
+    CONSTRAINT tor_estados_torneo_pk PRIMARY KEY (id)
 );
 
 -- ESTADO DE PARTIDOS  *******************************************************************
 CREATE TABLE tor_estados_partido (
-    estado_id INT(4) AUTO_INCREMENT,
+    id INT(4) AUTO_INCREMENT,
     descripcion text,
-    CONSTRAINT tor_estados_partido_pk PRIMARY KEY (estado_id)
+    CONSTRAINT tor_estados_partido_pk PRIMARY KEY (id)
 );
 
 -- JUGADORES  *******************************************************************
 CREATE TABLE tor_jugadores (
-    jugador_id INT(4) AUTO_INCREMENT,
+    id INT(4) AUTO_INCREMENT,
     nombre text,
 	equipo int,
-    CONSTRAINT tor_jugadores_pk PRIMARY KEY (jugador_id)
+    CONSTRAINT tor_jugadores_pk PRIMARY KEY (id),
+    CONSTRAINT tor_jugadores_fk_equipos FOREIGN KEY (equipo) REFERENCES tor_equipos(id)
 );
 
 -- TORNEOS  *******************************************************************
 CREATE TABLE tor_torneos (
-    torneo_id INT(4) AUTO_INCREMENT,
+    id INT(4) AUTO_INCREMENT,
     nombre text,
 	estado int,
 	fecha Date,
-    CONSTRAINT tor_torneos_pk PRIMARY KEY (torneo_id)
+    CONSTRAINT tor_torneos_pk PRIMARY KEY (id),
+    CONSTRAINT tor_torneos_fk_estados FOREIGN KEY (estado) REFERENCES tor_estados_torneo(id)
 );
 
 -- PARTICIPANTES  *******************************************************************
 CREATE TABLE tor_participantes (
-    participante_id INT(4) AUTO_INCREMENT,
+    id INT(4) AUTO_INCREMENT,
     torneo int,
 	jugador int,
 	derrotas int,
-    CONSTRAINT tor_participantes_pk PRIMARY KEY (participante_id)
+    CONSTRAINT tor_participantes_pk PRIMARY KEY (id),
+    CONSTRAINT tor_participantes_fk_torneo FOREIGN KEY (torneo) REFERENCES tor_torneos(id),
+    CONSTRAINT tor_participantes_fk_jugador FOREIGN KEY (jugador) REFERENCES tor_jugadores(id)
 );
 
 -- PARTIDOS  *******************************************************************
 CREATE TABLE tor_partidos (
-    partido_id INT(4) AUTO_INCREMENT,
+    id INT(4) AUTO_INCREMENT,
     torneo int,
 	local int,
 	visitante int,
 	estado int,
 	goles_local int,
 	goles_visitante int,
-    CONSTRAINT tor_partidos_pk PRIMARY KEY (partido_id)
+    CONSTRAINT tor_partidos_pk PRIMARY KEY (id),
+    CONSTRAINT tor_partidos_fk_torneo FOREIGN KEY (torneo) REFERENCES tor_torneos(id),
+    CONSTRAINT tor_partidos_fk_local FOREIGN KEY (local) REFERENCES tor_participantes(id),
+    CONSTRAINT tor_partidos_fk_visitante FOREIGN KEY (visitante) REFERENCES tor_participantes(id),
+    CONSTRAINT tor_partidos_fk_estados FOREIGN KEY (estado) REFERENCES tor_estados_partido(id)
 );
+
+insert into tor_estados_partido (id, descripcion) values
+(1, "Pendiente"),
+(2, "Jugado");
+
+insert into tor_estados_torneo(id, descripcion) values
+(1, "Curso"),
+(2, "Terminado");

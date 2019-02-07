@@ -4,8 +4,8 @@ import com.caballero.torneos.AplicacionUI;
 import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.Fichador;
 import com.caballero.torneos.negocios.excepciones.JugadorInvalidoExcepcion;
-import com.caballero.torneos.negocios.interfaces.EquipoServicio;
-import com.caballero.torneos.negocios.interfaces.JugadorServicio;
+import com.caballero.torneos.negocios.interfaces.ServicioEquipo;
+import com.caballero.torneos.negocios.interfaces.ServicioJugador;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.vaadin.data.provider.ListDataProvider;
@@ -24,8 +24,8 @@ public class PaginaJugadorAM extends VerticalLayout implements View {
 	private TextField inNombre;
 	private ComboBox<Equipo> inEquipo;
 	private Jugador jugador;
-	private JugadorServicio jugadorServicio;
-	private EquipoServicio equipoServicio;
+	private ServicioJugador jugadorServicio;
+	private ServicioEquipo equipoServicio;
 	
 	public PaginaJugadorAM() {
 		jugadorServicio  = FabricaServicios.crearJugadorServicio();

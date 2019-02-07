@@ -7,15 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.caballero.torneos.persistencia.Definido;
 import com.caballero.torneos.persistencia.DAOMySQL;
+import com.caballero.torneos.persistencia.Definido;
 import com.caballero.torneos.persistencia.entidades.Partido;
 import com.caballero.torneos.persistencia.interfaces.PartidoDAO;
 
 public class PartidoDAOMySQL extends DAOMySQL implements PartidoDAO{
 	private final String campos = "torneo, local, visitante, estado, goles_local, goles_visitante";
 	private final String tabla = "tor_partidos";
-	private final String ID = "partido_ID";
 	
 	@Override
 	public void insert(Partido partido) {
@@ -30,14 +29,51 @@ public class PartidoDAOMySQL extends DAOMySQL implements PartidoDAO{
 	}
 
 	@Override
-	public List<Partido> select() {
-		String condicion = "1=1";
-		return selectByCondicion(condicion);
+	public void update(Partido partido) {
+		String condicion = "ID = "+partido.getID();
+		String valores = "set torneo = " + partido.getTorneo()
+				+ "set local = " + partido.getLocal()
+				+ "set visitante = " + partido.getVisitante()
+				+ "set goles_local = " + partido.getMarcadorLocal()
+				+ "set goles_visitante= " + partido.getMarcadorVisitante();
+		String consulta = "update "+tabla+" set "+valores+" where ("+condicion+");";
+		ejecutarSQL(consulta);
 	}
 
+	@Override
+	public void delete(Partido partido) {
+		String condicion = "ID = "+partido.getID();
+		String consulta = "delete from "+tabla+" where("+condicion+");";
+		ejecutarSQL(consulta);
+	}
+
+	@Override
+	public List<Partido> select() {
+		String condicion = "true";
+		return selectByCondicion(condicion);
+	}
+	
+	@Override
+	public Partido selectByID(int id) {
+		return selectUnicoByCondicion("ID = "+id);
+	}
+
+	@Override
+	public Partido selectUltimo() {
+		int id = selectLastID(tabla);
+		return selectByID(id);
+	}
+
+	private Partido selectUnicoByCondicion(String condicion) {
+		List<Partido> seleccion = selectByCondicion(condicion);
+		if (!seleccion.isEmpty())
+			return seleccion.get(0);
+		return null;
+	}
+	
 	private List<Partido> selectByCondicion(String condicion) {
 		List<Partido> equipos = new ArrayList<Partido>();
-		String comandoSQL = "select "+ID+", "+campos+" from "+tabla+" where ("+condicion+");";  
+		String comandoSQL = "select ID, "+campos+" from "+tabla+" where ("+condicion+");";  
 		
 		try { 
 			Class.forName(driver); 
@@ -47,7 +83,7 @@ public class PartidoDAOMySQL extends DAOMySQL implements PartidoDAO{
 	
 			while (resultados.next()) {
 				equipos.add(new Partido(
-						resultados.getInt(ID),
+						resultados.getInt("ID"),
 						resultados.getInt("torneo"),
 						resultados.getInt("local"),
 						resultados.getInt("visitante"),

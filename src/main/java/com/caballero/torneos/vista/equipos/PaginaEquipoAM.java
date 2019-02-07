@@ -3,11 +3,12 @@ package com.caballero.torneos.vista.equipos;
 import com.caballero.torneos.AplicacionUI;
 import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.excepciones.EquipoInvalidoExcepcion;
-import com.caballero.torneos.negocios.interfaces.EquipoServicio;
+import com.caballero.torneos.negocios.interfaces.ServicioEquipo;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -16,7 +17,7 @@ public class PaginaEquipoAM extends VerticalLayout implements View {
 	public static String NOMBRE = "PaginaEquipoAM";
 	private TextField inNombre;
 	private Equipo equipo;
-	private EquipoServicio servicio;
+	private ServicioEquipo servicio;
 	
 	public PaginaEquipoAM() {
 		servicio = FabricaServicios.crearEquipoServicio();
@@ -54,8 +55,9 @@ public class PaginaEquipoAM extends VerticalLayout implements View {
 			}
 			equipo = null;
 			volver();
+			
 		} catch (EquipoInvalidoExcepcion e) {
-			e.printStackTrace();
+			Notification.show(e.getMessage());
 		}	
 	}
 	

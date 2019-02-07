@@ -12,7 +12,7 @@ public class TorneoOBDTest {
 	public static void insertTest(String nombre) {
 		System.out.println("___ Insert Test: "+nombre);
 		TorneoDAO obd = FabricaDAO.crearTorneoOBD();
-		obd.insert(new Torneo(-1, nombre, Almanaque.hoy(), EstadoTorneo.JUGANDO));
+		obd.insert(new Torneo(-1, nombre, Almanaque.hoy(), EstadoTorneo.CURSO));
 	}
 	
 	public static void selectTest() {

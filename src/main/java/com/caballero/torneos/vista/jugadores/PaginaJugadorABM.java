@@ -5,7 +5,7 @@ import java.util.List;
 import com.caballero.torneos.AplicacionUI;
 import com.caballero.torneos.negocios.FabricaServicios;
 import com.caballero.torneos.negocios.Fichador;
-import com.caballero.torneos.negocios.interfaces.JugadorServicio;
+import com.caballero.torneos.negocios.interfaces.ServicioJugador;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.vista.PaginaPrincipal;
 import com.caballero.torneos.vista.tablas.TablaJugadores;
@@ -20,7 +20,7 @@ public class PaginaJugadorABM extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 	public static String NOMBRE = "PaginaJugadorABM";
 	private TablaJugadores tabla;
-	private JugadorServicio jugadorServicio;
+	private ServicioJugador jugadorServicio;
 	
 	public PaginaJugadorABM() {
 		jugadorServicio = FabricaServicios.crearJugadorServicio();
