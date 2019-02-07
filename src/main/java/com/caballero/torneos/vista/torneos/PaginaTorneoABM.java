@@ -3,7 +3,8 @@ package com.caballero.torneos.vista.torneos;
 import java.util.List;
 
 import com.caballero.torneos.AplicacionUI;
-import com.caballero.torneos.negocios.Organizador;
+import com.caballero.torneos.negocios.FabricaServicios;
+import com.caballero.torneos.negocios.interfaces.ServicioTorneo;
 import com.caballero.torneos.persistencia.entidades.Torneo;
 import com.caballero.torneos.vista.PaginaPrincipal;
 import com.caballero.torneos.vista.tablas.TablaTorneos;
@@ -18,8 +19,11 @@ public class PaginaTorneoABM extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 	public static String NOMBRE = "PaginaTorneoABM";
 	private TablaTorneos tabla;
+	private ServicioTorneo servicioTorneo;
 	
-	public PaginaTorneoABM() {}
+	public PaginaTorneoABM() {
+		servicioTorneo = FabricaServicios.crearServicioTorneo();
+	}
 	
 	private HorizontalLayout crearBotones() {
 		Button btnAgregar = new Button("Agregar");
@@ -61,7 +65,7 @@ public class PaginaTorneoABM extends VerticalLayout implements View {
 			Notification.show("Habia demasiados torneos seleccionados");
 		else {
 			Torneo torneo = torneos.get(0);
-			Organizador.borrarTorneo(torneo);
+			servicioTorneo.cancelar(torneo);
 			recargar();
 		}
 	}

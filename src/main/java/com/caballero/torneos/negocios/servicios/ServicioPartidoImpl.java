@@ -57,4 +57,10 @@ public class ServicioPartidoImpl implements ServicioPartido {
 		return true;
 	}
 
+	@Override
+	public boolean agregarResultado(Partido partido) {
+		dao.update(partido);
+		return true;
+	}
+
 }

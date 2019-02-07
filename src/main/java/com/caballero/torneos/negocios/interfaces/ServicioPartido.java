@@ -20,4 +20,6 @@ public interface ServicioPartido {
 	
 	public boolean agregar(Torneo torneo, Participante p1, Participante p2);
 	
+	public boolean agregarResultado(Partido partido);
+	
 }

@@ -9,22 +9,17 @@ import com.caballero.torneos.persistencia.interfaces.JugadorDAO;
 public class Fichador {
 
 	public static void borrarEquipo(Equipo equipo) {
-		EquipoDAO obd = FabricaDAO.crearEquipoOBD();
+		EquipoDAO obd = FabricaDAO.crearEquipoDAO();
 		obd.delete(equipo);
 	}
 
 	public static void borrarJugador(Jugador jugador) {
-		JugadorDAO obd = FabricaDAO.crearJugadorOBD();
+		JugadorDAO obd = FabricaDAO.crearJugadorDAO();
 		obd.delete(jugador);
 	}
 
 	public static Equipo traerEquipoSegunID(Integer id) {
-		EquipoDAO obd = FabricaDAO.crearEquipoOBD();
-		return obd.selectByID(id);
-	}
-	
-	public static Jugador traerJugadorSegunID(Integer id) {
-		JugadorDAO obd = FabricaDAO.crearJugadorOBD();
+		EquipoDAO obd = FabricaDAO.crearEquipoDAO();
 		return obd.selectByID(id);
 	}
 	

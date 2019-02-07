@@ -13,23 +13,23 @@ import com.caballero.torneos.persistencia.mysql.TorneoDAOMySQL;
 
 public class FabricaDAO {
 
-	public static EquipoDAO	crearEquipoOBD() {
+	public static EquipoDAO	crearEquipoDAO() {
 		return new EquipoDAOMySQL();
 	}
 
-	public static TorneoDAO	crearTorneoOBD() {
+	public static TorneoDAO	crearTorneoDAO() {
 		return new TorneoDAOMySQL();
 	}
 	
-	public static JugadorDAO crearJugadorOBD() {
+	public static JugadorDAO crearJugadorDAO() {
 		return new JugadorDAOMySQL();
 	}
 
-	public static ParticipanteDAO crearParticipanteOBD() {
+	public static ParticipanteDAO crearParticipanteDAO() {
 		return new ParticipanteDAOMySQL();
 	}
 	
-	public static PartidoDAO crearPartidoOBD() {
+	public static PartidoDAO crearPartidoDAO() {
 		return new PartidoDAOMySQL();
 	}
 	

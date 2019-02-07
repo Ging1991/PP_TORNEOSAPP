@@ -7,7 +7,5 @@ public class Almanaque {
 	public static Date hoy() {
 		return new Date(new java.util.Date().getTime());
 	}
-	
-	// prueba
 
 }

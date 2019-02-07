@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.caballero.torneos.negocios.interfaces.ServicioParticipante;
 import com.caballero.torneos.negocios.interfaces.ServicioPartido;
 import com.caballero.torneos.negocios.interfaces.ServicioTorneo;
+import com.caballero.torneos.persistencia.definidos.EstadoPartido;
 import com.caballero.torneos.persistencia.entidades.Participante;
 import com.caballero.torneos.persistencia.entidades.Partido;
 import com.caballero.torneos.persistencia.entidades.Torneo;
@@ -65,6 +66,17 @@ class ServicioPartidoTest {
 		Participante p1 = participantes.get(0);
 		Participante p2 = participantes.get(1);
 		assertTrue(servicioPartido.agregar(torneo, p1, p2));
+	}
+
+	@Test
+	void agregarResultado_PartidoPendiente_RetornaTrue() {
+		Torneo torneo = servicioTorneo.traerUltimo();
+		List<Partido> partidos = servicioPartido.traerPartidosPendientes(torneo);
+		Partido partido = partidos.get(0);
+		partido.setEstado(EstadoPartido.JUGADO);
+		partido.setMarcadorLocal(3);
+		partido.setMarcadorVisitante(3);
+		assertTrue(servicioPartido.agregarResultado(partido));
 	}
 		
 }
