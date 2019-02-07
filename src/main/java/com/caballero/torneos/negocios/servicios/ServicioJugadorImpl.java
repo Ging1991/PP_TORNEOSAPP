@@ -60,6 +60,11 @@ public class ServicioJugadorImpl implements ServicioJugador {
 	@Override
 	public List<Jugador> traerTodo() {
 		return jugadorDAO.select();
+	}
+
+	@Override
+	public Jugador traerUltimo() {
+		return jugadorDAO.selectUltimo();
 	}	
 		
 }

@@ -15,4 +15,6 @@ public interface ServicioJugador {
 	
 	public List<Jugador> traerTodo();
 	
+	public Jugador traerUltimo();
+	
 }

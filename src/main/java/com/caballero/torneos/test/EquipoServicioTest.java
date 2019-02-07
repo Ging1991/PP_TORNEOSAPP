@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import com.caballero.torneos.negocios.excepciones.EquipoInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.ServicioEquipo;
 import com.caballero.torneos.persistencia.entidades.Equipo;
-import com.caballero.torneos.test.repositorio.FabricaServiciosTest;
 
 class EquipoServicioTest {
 	private static ServicioEquipo servicio;
