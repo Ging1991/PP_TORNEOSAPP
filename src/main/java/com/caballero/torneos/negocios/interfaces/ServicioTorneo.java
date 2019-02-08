@@ -14,5 +14,9 @@ public interface ServicioTorneo {
 	public boolean cancelar(Torneo torneo);
 	
 	public boolean generarFixture(Torneo torneo);
+
+	public List<Torneo> traerTodo();
+
+	public boolean modificar(Torneo torneo);
 	
 }

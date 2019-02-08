@@ -31,6 +31,12 @@ class ServicioTorneoTest {
 	}
 
 	@Test
+	void traerTodo_Existen3_Retorna3() {
+		List<Torneo> torneos = servicioTorneo.traerTodo();
+		assertTrue(torneos.size() == 3);
+	}
+
+	@Test
 	void agregar_NombreValidoCantidadParticipantesValida_retornaTrue() {
 		String nombre = "Mi torneo de prueba";
 		List<Jugador> lista = new ArrayList<>();
@@ -50,6 +56,13 @@ class ServicioTorneoTest {
 	void generarFixture_EnCurso_RetornaTrue() {
 		Torneo torneo = servicioTorneo.traerUltimo();
 		assertTrue(servicioTorneo.generarFixture(torneo));
+	}
+
+	@Test
+	void modificarNombre_EnCurso_RetornaTrue() {
+		Torneo torneo = servicioTorneo.traerUltimo();
+		torneo.setNombre("Prueba1");
+		assertTrue(servicioTorneo.modificar(torneo));
 	}
 	
 }

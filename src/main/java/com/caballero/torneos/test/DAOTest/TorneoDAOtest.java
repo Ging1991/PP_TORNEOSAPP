@@ -1,5 +1,6 @@
 package com.caballero.torneos.test.DAOTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.caballero.torneos.negocios.Almanaque;
@@ -16,29 +17,22 @@ public class TorneoDAOtest implements TorneoDAO {
 		torneo3 = new Torneo(3, "Torneo3", Almanaque.hoy(), EstadoTorneo.CURSO);
 	}
 	
-	
 	@Override
-	public void insert(Torneo t) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void insert(Torneo t) {}
 
 	@Override
-	public void update(Torneo t) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void update(Torneo t) {}
 
 	@Override
-	public void delete(Torneo t) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void delete(Torneo t) {}
 
 	@Override
 	public List<Torneo> select() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Torneo> torneos = new ArrayList<>();
+		torneos.add(torneo1);
+		torneos.add(torneo2);
+		torneos.add(torneo3);
+		return torneos;
 	}
 
 	@Override

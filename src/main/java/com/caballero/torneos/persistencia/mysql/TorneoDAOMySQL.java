@@ -15,7 +15,6 @@ import com.caballero.torneos.persistencia.interfaces.TorneoDAO;
 public class TorneoDAOMySQL extends DAOMySQL implements TorneoDAO{
 	private final String campos = "nombre, estado, fecha";
 	private final String tabla = "tor_torneos";
-	private final String ID = "torneo_ID";
 	
 	@Override
 	public void insert(Torneo torneo) {
@@ -27,7 +26,7 @@ public class TorneoDAOMySQL extends DAOMySQL implements TorneoDAO{
 	}
 	
 	public void update(Torneo torneo) {
-		String condicion = ID +"="+torneo.getID();
+		String condicion = "ID = "+torneo.getID();
 		String valores = " nombre = '"+torneo.getNombre()+"'"
 				+", estado = "+ Definido.estadoTorneo(torneo.getEstado())
 				+", fecha = '"+torneo.getFecha()+"'";
@@ -36,7 +35,7 @@ public class TorneoDAOMySQL extends DAOMySQL implements TorneoDAO{
 	}
 
 	public void delete(Torneo torneo) {
-		String condicion = ID +"="+torneo.getID();
+		String condicion = "ID = "+torneo.getID();
 		String consulta = "delete from "+tabla+" where("+condicion+");";
 		ejecutarSQL(consulta);
 	}
@@ -67,7 +66,7 @@ public class TorneoDAOMySQL extends DAOMySQL implements TorneoDAO{
 	
 	private List<Torneo> selectByCondicion(String condicion) {
 		List<Torneo> torneos = new ArrayList<Torneo>();
-		String comandoSQL = "select "+ID+", "+campos+" from "+tabla+" where ("+condicion+");";  
+		String comandoSQL = "select ID, "+campos+" from "+tabla+" where ("+condicion+");";  
 		
 		try { 
 			Class.forName(driver); 
@@ -77,7 +76,7 @@ public class TorneoDAOMySQL extends DAOMySQL implements TorneoDAO{
 	
 			while (resultados.next()) {
 				torneos.add(new Torneo(
-						resultados.getInt(ID),
+						resultados.getInt("ID"),
 						resultados.getString("nombre"),
 						resultados.getDate("fecha"),
 						Definido.estadoTorneo(resultados.getInt("estado"))

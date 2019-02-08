@@ -78,4 +78,15 @@ public class ServicioTorneoImpl implements ServicioTorneo {
 		return true;
 	}
 
+	@Override
+	public List<Torneo> traerTodo() {
+		return torneoDAO.select();
+	}
+
+	@Override
+	public boolean modificar(Torneo torneo) {
+		torneoDAO.update(torneo);
+		return true;
+	}
+
 }
