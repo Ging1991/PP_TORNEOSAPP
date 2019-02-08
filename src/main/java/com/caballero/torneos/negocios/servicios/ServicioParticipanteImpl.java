@@ -41,4 +41,9 @@ public class ServicioParticipanteImpl implements ServicioParticipante {
 		return participanteDAO.selectByTorneoDerrotas(torneo, derrotas);
 	}
 
+	@Override
+	public List<Participante> traerPorJugador(Jugador jugador) {
+		return participanteDAO.selectByJugador(jugador);
+	}
+
 }

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -132,5 +134,18 @@ class ServicioJugadorTest {
 		Jugador jugador = servicioJugador.traerPorID(ID);
 		assertNull(jugador);
 	}
-	
+
+	@Test
+	void traerPorEquipo_JugadorExistente_retornaJugadoresConEseEquipo() {
+		Equipo equipo = servicioEquipo.traerPorID(1);
+		List<Jugador> jugadores = servicioJugador.traerPorEquipo(equipo); 
+		assertTrue(jugadores.size() == 3);
+	}
+
+	@Test
+	void borrarJugador_JugadorLibre_RetornaTrue() throws JugadorInvalidoExcepcion {
+		Jugador jugador = servicioJugador.traerUltimo();
+		assertTrue(servicioJugador.eliminar(jugador));
+	}
+
 }

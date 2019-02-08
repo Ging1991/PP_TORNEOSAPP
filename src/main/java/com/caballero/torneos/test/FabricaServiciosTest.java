@@ -25,7 +25,8 @@ public class FabricaServiciosTest {
 	
 	public static ServicioEquipo crearEquipoServicio() {
 		EquipoDAO obd = new EquipoDAOTest();
-		return new ServicioEquipoImpl(obd);
+		ServicioJugador sj = crearJugadorServicio();
+		return new ServicioEquipoImpl(obd, sj);
 	}
 	
 	public static ServicioPartido crearServicioPartido() {
@@ -48,7 +49,8 @@ public class FabricaServiciosTest {
 	public static ServicioJugador crearJugadorServicio() {
 		JugadorDAO obd = new JugadorDAOTest();
 		EquipoDAO dao = new EquipoDAOTest();
-		return new ServicioJugadorImpl(obd, dao);
+		ServicioParticipante sp = crearServicioParticipante();
+		return new ServicioJugadorImpl(obd, dao, sp);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.caballero.torneos.test.DAOTest;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.persistencia.interfaces.JugadorDAO;
 
@@ -52,6 +53,14 @@ public class JugadorDAOTest implements JugadorDAO {
 		if (nombre.equals("Jorge")) return jugador2;
 		if (nombre.equals("Chiqui")) return jugador3;
 		return null;
+	}
+
+	@Override
+	public List<Jugador> selectByEquipo(Equipo equipo) {
+		if (equipo.getID() == 1)
+			return select();
+		else
+			return new ArrayList<>();
 	}
 	
 }

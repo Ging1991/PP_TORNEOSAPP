@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.caballero.torneos.persistencia.DAOMySQL;
+import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.persistencia.interfaces.JugadorDAO;
 
@@ -56,10 +57,15 @@ public class JugadorDAOMySQL extends DAOMySQL implements JugadorDAO{
 		int id = selectLastID(tabla);
 		return selectByID(id);
 	}
-	
+
 	@Override
 	public Jugador selectByNombre(String nombre) {
 		return selectUnicoByCondicion("nombre = "+nombre);
+	}
+
+	@Override
+	public List<Jugador> selectByEquipo(Equipo equipo) {
+		return selectByCondicion("equipo = "+equipo);
 	}
 	
 	private Jugador selectUnicoByCondicion(String condicion) {

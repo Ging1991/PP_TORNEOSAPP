@@ -3,20 +3,22 @@ package com.caballero.torneos.vista.tablas;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.caballero.torneos.negocios.Fichador;
+import com.caballero.torneos.negocios.FabricaServicios;
+import com.caballero.torneos.negocios.interfaces.ServicioEquipo;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.Column;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.renderers.TextRenderer;
 
 public class TablaJugadores extends VerticalLayout{
 	private static final long serialVersionUID = 1L;
 	Grid<Jugador> grilla;
+	private ServicioEquipo servicioEquipo;
 
 	public TablaJugadores(List<Jugador> jugadores) {
+		servicioEquipo = FabricaServicios.crearEquipoServicio();
 		grilla = new Grid<Jugador>();
 		grilla.setSelectionMode(SelectionMode.MULTI);
 		recargar(jugadores);
@@ -29,7 +31,7 @@ public class TablaJugadores extends VerticalLayout{
 		grilla.setItems(jugadores);
 		grilla.addColumn(Jugador::getNombre).setCaption("Nombre");
 		Column<Jugador, Integer> columna = grilla.addColumn(Jugador::getEquipo);
-		columna.setRenderer(equipo -> (Fichador.traerEquipoSegunID(equipo)), new TextRenderer());
+		//columna.setRenderer(equipo -> (servicioEquipo.traerPorID(jugador.getEquipo() , new TextRenderer())));
 		columna.setCaption("Equipo");
 	}
 	

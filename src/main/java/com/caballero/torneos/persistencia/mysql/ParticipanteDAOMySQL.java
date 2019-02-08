@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.caballero.torneos.persistencia.DAOMySQL;
+import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.persistencia.entidades.Participante;
 import com.caballero.torneos.persistencia.entidades.Torneo;
 import com.caballero.torneos.persistencia.interfaces.ParticipanteDAO;
@@ -63,6 +64,12 @@ public class ParticipanteDAOMySQL extends DAOMySQL implements ParticipanteDAO{
 	@Override
 	public List<Participante> selectByTorneo(Torneo torneo) {
 		String condicion = "torneo = " + torneo.getID();
+		return selectByCondicion(condicion);
+	}
+	
+	@Override
+	public List<Participante> selectByJugador(Jugador jugador) {
+		String condicion = "jugador = " + jugador.getID();
 		return selectByCondicion(condicion);
 	}
 	

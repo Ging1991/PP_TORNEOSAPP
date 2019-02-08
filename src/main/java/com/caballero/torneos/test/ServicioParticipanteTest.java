@@ -45,12 +45,26 @@ class ServicioParticipanteTest {
 		List<Participante> participantes = servicioParticipante.traer(torneo);
 		assertTrue(participantes.size() == 3);
 	}
-	
+
 	@Test
 	void traerPorDerrotas_TorneoExistente_RetornaListaDe3() {
 		Torneo torneo = servicioTorneo.traerUltimo();
 		List<Participante> participantes = servicioParticipante.traerPorDerrotas(torneo, 0);
 		assertTrue(participantes.size() == 3);
+	}
+
+	@Test
+	void traerPorJugador_Existente_RetornaParticipante() {
+		Jugador jugador = servicioJugador.traerPorID(1);
+		List<Participante> participantes = servicioParticipante.traerPorJugador(jugador);
+		assertTrue(participantes.size() == 3);
+	}
+
+	@Test
+	void traerPorJugador_Inexistente_RetornaVacio() {
+		Jugador jugador = servicioJugador.traerPorID(3);
+		List<Participante> participantes = servicioParticipante.traerPorJugador(jugador);
+		assertTrue(participantes.size() == 0);
 	}
 	
 }

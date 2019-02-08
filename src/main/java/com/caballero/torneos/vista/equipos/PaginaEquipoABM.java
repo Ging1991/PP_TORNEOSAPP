@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.caballero.torneos.AplicacionUI;
 import com.caballero.torneos.negocios.FabricaServicios;
-import com.caballero.torneos.negocios.Fichador;
+import com.caballero.torneos.negocios.excepciones.EquipoInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.ServicioEquipo;
 import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.caballero.torneos.vista.PaginaPrincipal;
@@ -66,7 +66,11 @@ public class PaginaEquipoABM extends VerticalLayout implements View {
 			Notification.show("Habia demasiados equipos seleccionados");
 		else {
 			Equipo equipo = equipos.get(0);
-			Fichador.borrarEquipo(equipo);
+			try {
+				equipoServicio.eliminar(equipo);
+			} catch (EquipoInvalidoExcepcion e) {
+				Notification.show(e.getMessage());
+			}
 			recargar();
 		}
 	}

@@ -15,5 +15,7 @@ public interface ServicioParticipante {
 	public List<Participante> traer(Torneo torneo);
 
 	public List<Participante> traerPorDerrotas(Torneo torneo, int derrotas);
+
+	public List<Participante> traerPorJugador(Jugador jugador);
 		
 }

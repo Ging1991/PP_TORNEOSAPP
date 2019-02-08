@@ -2,7 +2,6 @@ package com.caballero.torneos.vista.jugadores;
 
 import com.caballero.torneos.AplicacionUI;
 import com.caballero.torneos.negocios.FabricaServicios;
-import com.caballero.torneos.negocios.Fichador;
 import com.caballero.torneos.negocios.excepciones.JugadorInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.ServicioEquipo;
 import com.caballero.torneos.negocios.interfaces.ServicioJugador;
@@ -24,12 +23,12 @@ public class PaginaJugadorAM extends VerticalLayout implements View {
 	private TextField inNombre;
 	private ComboBox<Equipo> inEquipo;
 	private Jugador jugador;
-	private ServicioJugador jugadorServicio;
-	private ServicioEquipo equipoServicio;
+	private ServicioJugador servicioJugador;
+	private ServicioEquipo servicioEquipo;
 	
 	public PaginaJugadorAM() {
-		jugadorServicio  = FabricaServicios.crearJugadorServicio();
-		equipoServicio = FabricaServicios.crearEquipoServicio();
+		servicioJugador  = FabricaServicios.crearJugadorServicio();
+		servicioEquipo = FabricaServicios.crearEquipoServicio();
 	}
 	
 	private HorizontalLayout crearBotones() {
@@ -62,12 +61,12 @@ public class PaginaJugadorAM extends VerticalLayout implements View {
 		
 		try {
 			if (jugador == null)
-				jugadorServicio.agregar(new Jugador(-1, equipo.getID(), nombre));
+				servicioJugador.agregar(new Jugador(-1, equipo.getID(), nombre));
 				
 			else {
 				jugador.setNombre(nombre);
 				jugador.setEquipo(equipo.getID());
-				jugadorServicio.modificar(jugador);
+				servicioJugador.modificar(jugador);
 			}
 		} catch (JugadorInvalidoExcepcion e) {
 			Notification.show(e.getMessage());
@@ -85,14 +84,14 @@ public class PaginaJugadorAM extends VerticalLayout implements View {
 		inNombre.setValue("");
 		
 		inEquipo = new ComboBox<Equipo>("Equipo");
-		ListDataProvider<Equipo> data = new ListDataProvider<Equipo>(equipoServicio.traerTodo());
+		ListDataProvider<Equipo> data = new ListDataProvider<Equipo>(servicioEquipo.traerTodo());
 		inEquipo.setDataProvider(data);
 		
 		AplicacionUI ui = AplicacionUI.getInstancia();
 		jugador = (Jugador) ui.getSesion("jugador");
 		if (jugador != null) {
 			inNombre.setValue(jugador.getNombre());
-			Equipo equipo = Fichador.traerEquipoSegunID(jugador.getEquipo());
+			Equipo equipo = servicioEquipo.traerPorID(jugador.getEquipo());
 			inEquipo.setSelectedItem(equipo);
 		}
 		

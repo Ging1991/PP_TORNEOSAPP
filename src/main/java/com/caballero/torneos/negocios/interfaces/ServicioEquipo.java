@@ -16,5 +16,9 @@ public interface ServicioEquipo {
 	public Equipo traerPorNombre(String nombre) throws EquipoInvalidoExcepcion;
 
 	public List<Equipo> traerTodo();
+
+	public Equipo traerPorID(Integer ID);
+
+	public boolean eliminar(Equipo equipo) throws EquipoInvalidoExcepcion;
 	
 }

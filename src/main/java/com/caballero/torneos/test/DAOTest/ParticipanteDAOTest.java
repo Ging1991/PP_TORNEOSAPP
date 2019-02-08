@@ -3,6 +3,7 @@ package com.caballero.torneos.test.DAOTest;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.persistencia.entidades.Participante;
 import com.caballero.torneos.persistencia.entidades.Torneo;
 import com.caballero.torneos.persistencia.interfaces.ParticipanteDAO;
@@ -62,6 +63,14 @@ public class ParticipanteDAOTest implements ParticipanteDAO {
 	@Override
 	public List<Participante> selectByTorneoDerrotas(Torneo torneo, int derrotas) {
 		return select();
+	}
+
+	@Override
+	public List<Participante> selectByJugador(Jugador jugador) {
+		if (jugador.getID() == 1)
+			return select();
+		else
+			return new ArrayList<>();
 	}
 
 }

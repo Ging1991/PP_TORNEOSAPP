@@ -4,14 +4,18 @@ import java.util.List;
 
 import com.caballero.torneos.negocios.excepciones.EquipoInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.ServicioEquipo;
+import com.caballero.torneos.negocios.interfaces.ServicioJugador;
 import com.caballero.torneos.persistencia.entidades.Equipo;
+import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.persistencia.interfaces.EquipoDAO;
 
 public class ServicioEquipoImpl implements ServicioEquipo {
 	private EquipoDAO obd;
+	private ServicioJugador servicioJugador;
 	
-	public ServicioEquipoImpl(EquipoDAO obd) {
+	public ServicioEquipoImpl(EquipoDAO obd, ServicioJugador servicioJugador) {
 		this.obd = obd;
+		this.servicioJugador = servicioJugador;
 	}
 
 	@Override
@@ -58,6 +62,23 @@ public class ServicioEquipoImpl implements ServicioEquipo {
 	@Override
 	public List<Equipo> traerTodo() {
 		return obd.select();
+	}
+
+	@Override
+	public Equipo traerPorID(Integer ID) {
+		return obd.selectByID(ID);
+	}
+
+	@Override
+	public boolean eliminar(Equipo equipo) throws EquipoInvalidoExcepcion {
+		List<Jugador> jugadores = servicioJugador.traerPorEquipo(equipo);
+		
+		if (jugadores.size() == 0)
+			obd.delete(equipo);
+		else
+			throw new EquipoInvalidoExcepcion("No se puede eliminar el equipo seleccionado porque hay jugadores que dependen de él.");
+		
+		return true;
 	}
 
 }

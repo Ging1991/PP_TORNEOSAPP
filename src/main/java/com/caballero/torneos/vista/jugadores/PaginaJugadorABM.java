@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.caballero.torneos.AplicacionUI;
 import com.caballero.torneos.negocios.FabricaServicios;
-import com.caballero.torneos.negocios.Fichador;
+import com.caballero.torneos.negocios.excepciones.JugadorInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.ServicioJugador;
 import com.caballero.torneos.persistencia.entidades.Jugador;
 import com.caballero.torneos.vista.PaginaPrincipal;
@@ -69,7 +69,11 @@ public class PaginaJugadorABM extends VerticalLayout implements View {
 			Notification.show("Habia demasiados jugadores seleccionados");
 		else {
 			Jugador jugador = jugadores.get(0);
-			Fichador.borrarJugador(jugador);
+			try {
+				jugadorServicio.eliminar(jugador);
+			} catch (JugadorInvalidoExcepcion e) {
+				Notification.show(e.getMessage());
+			}
 			tabla.recargar(jugadorServicio.traerTodo());
 		}
 	}

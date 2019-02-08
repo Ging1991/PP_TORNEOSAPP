@@ -4,17 +4,23 @@ import java.util.List;
 
 import com.caballero.torneos.negocios.excepciones.JugadorInvalidoExcepcion;
 import com.caballero.torneos.negocios.interfaces.ServicioJugador;
+import com.caballero.torneos.negocios.interfaces.ServicioParticipante;
+import com.caballero.torneos.persistencia.entidades.Equipo;
 import com.caballero.torneos.persistencia.entidades.Jugador;
+import com.caballero.torneos.persistencia.entidades.Participante;
 import com.caballero.torneos.persistencia.interfaces.EquipoDAO;
 import com.caballero.torneos.persistencia.interfaces.JugadorDAO;
 
 public class ServicioJugadorImpl implements ServicioJugador {
 	private JugadorDAO jugadorDAO;
 	private EquipoDAO equipoDAO;
+	private ServicioParticipante servicioParticipante;
 	
-	public ServicioJugadorImpl(JugadorDAO jugadorDAO, EquipoDAO equipoDAO) {
+	public ServicioJugadorImpl(JugadorDAO jugadorDAO, EquipoDAO equipoDAO,
+			ServicioParticipante servicioParticipante) {
 		this.jugadorDAO = jugadorDAO;
 		this.equipoDAO = equipoDAO;
+		this.servicioParticipante = servicioParticipante;
 	}
 
 	@Override
@@ -70,6 +76,21 @@ public class ServicioJugadorImpl implements ServicioJugador {
 	@Override
 	public Jugador traerPorID(Integer ID) {
 		return jugadorDAO.selectByID(ID);
+	}
+
+	@Override
+	public List<Jugador> traerPorEquipo(Equipo equipo) {
+		return jugadorDAO.selectByEquipo(equipo);
+	}
+
+	@Override
+	public boolean eliminar(Jugador jugador) throws JugadorInvalidoExcepcion {
+		List<Participante> participantes = servicioParticipante.traerPorJugador(jugador);
+		if (participantes.size()>0)
+			throw new JugadorInvalidoExcepcion("No se puede borrar el jugador porque actualmente esta particiapndo de algun torneo.");
+
+		jugadorDAO.delete(jugador);	
+		return true;
 	}	
 		
 }
