@@ -24,6 +24,7 @@ public class AplicacionUI extends UI {
 	private static final long serialVersionUID = 1L;
 	private Navigator navegador;
 	private Map<String, Object> sesion;
+	//aas
 	
 	@Override
     protected void init(VaadinRequest vaadinRequest) {	
